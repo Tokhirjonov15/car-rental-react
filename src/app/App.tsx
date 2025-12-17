@@ -1,10 +1,11 @@
 import React from 'react';
-import "../css/app.css";
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
-import { RippleBadge } from './MaterialTheme/styled';
 import { Link, Route, Switch } from 'react-router-dom';
-import { About } from './screens/About';
-import { Users } from './screens/Users';
+import { VehiclesPage } from './screens/vehiclesPage';
+import { BookingPage } from './screens/bookingPage';
+import { HelpPage } from './screens/helpPage';
+import { UserPage } from './screens/userPage';
+import { HomePage } from './screens/homePage';
+import "../css/app.css";
 
 function App() {
   return (
@@ -12,34 +13,42 @@ function App() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">HomePage</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/vehicles">VehiclesPage</Link>
           </li>
           <li>
-            <Link to="/users">Users</Link>
+            <Link to="/booking">BookingPage</Link>
+          </li>
+          <li>
+            <Link to="/help">HelpPage</Link>
+          </li>
+          <li>
+            <Link to="/user">UserPage</Link>
           </li>
         </ul>
       </nav>
 
         <Switch>
-          <Route path="/about">
-            <About />
+          <Route path="/vehicles">
+            <VehiclesPage />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/booking">
+            <BookingPage />
+          </Route>
+          <Route path="/help">
+            <HelpPage />
+          </Route>
+          <Route path="/user">
+            <UserPage />
           </Route>
           <Route path="/">
-            <Home />
+            <HomePage />
           </Route>
         </Switch>
       </div>
   );
-}
-
-function Home() {
-  return <Container>Home</Container>;
 }
 
 export default App;
