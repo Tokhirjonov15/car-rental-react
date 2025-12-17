@@ -1,0 +1,97 @@
+/**  MAINHOME*/
+.hero-section {
+  background: #ffffff;
+  padding-top: 80px;
+  padding-bottom: 60px;
+}
+
+/* LEFT */
+.hero-left {
+  max-width: 520px;
+}
+
+.badge {
+  display: inline-flex;
+  background: rgba(66, 133, 244, 0.1);
+  color: #4285f4;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 52px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  color: #0f172a;
+}
+
+.hero-title span {
+  color: #4285f4;
+}
+
+.hero-desc {
+  margin-top: 20px !important;
+  font-size: 16px !important;
+  color: #64748b;
+  line-height: 1.6 !important;
+}
+
+/* HAPPY USERS */
+.happy-users {
+  margin-top: 30px;
+}
+
+.happy-users img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.happy-text {
+  margin-left: 12px;
+  font-size: 14px;
+  color: rgba(107, 114, 128, 1);
+  white-space: nowrap;
+}
+
+/* RIGHT */
+.hero-right {
+  width: 520px;
+}
+
+.hero-car {
+  width: 100%;
+  object-fit: contain;
+}
+
+/* SEARCH */
+.search-box {
+  margin-top: 60px;
+  background: #ffffff;
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.search-input {
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.search-input .MuiOutlinedInput-root {
+  border-radius: 12px;
+}
+
+.search-btn {
+  background: #4285f4 !important;
+  color: #fff !important;
+  padding: 14px 30px !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+}

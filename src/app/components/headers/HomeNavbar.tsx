@@ -1,4 +1,4 @@
-import { Box, Stack, Container } from "@mui/material";
+import { Box, Stack, Container, Button, Typography, TextField } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import "../../../css/navbar.css";
 
@@ -49,17 +49,24 @@ export function HomeNavbar () {
           </Stack>
 
           {/* RIGHT */}
-          <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}
+            className="auth-area"
+          >
             {!authMember ? (
-              <NavLink to="/signin" className="sign-in">
-              Sign In
-            </NavLink>
+              <>
+                <Button className="sign-in">Sign In</Button>
+                <Button className="sign-up">Sign Up</Button>
+              </>
             ) : (
-              <img />
+              <img
+                src="/icons/default-user.svg"
+                className="user-avatar"
+                alt="user"
+              />
             )}
-            <NavLink to="/signup" className="sign-up">
-              Sign Up
-            </NavLink>
           </Stack>
         </Stack>
       </Container>

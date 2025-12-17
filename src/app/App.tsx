@@ -4,11 +4,11 @@ import { VehiclesPage } from './screens/vehiclesPage';
 import { BookingPage } from './screens/bookingPage';
 import { HelpPage } from './screens/helpPage';
 import { UserPage } from './screens/userPage';
-import { HomePage } from './screens/homePage';
 import "../css/app.css";
 import { HomeNavbar } from './components/headers/HomeNavbar';
 import { OtherNavbar } from './components/headers/OtherNavbar';
 import { Footer } from './components/footer';
+import HomePage from './screens/homePage';
 
 function App() {
   const location = useLocation();
