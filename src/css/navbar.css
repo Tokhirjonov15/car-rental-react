@@ -1,0 +1,78 @@
+.navbar {
+    width: 100%;
+  height: 88px;
+  border-bottom: 1px solid #eee;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+
+/* LOGO */
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: #3b82f6;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* NAV LINKS */
+.nav-link {
+  text-decoration: none;
+  font-size: 25px;
+  color: rgba(107, 114, 128, 255);
+  font-weight: 500;
+  font-family: Plus Jakarta Sans;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #e6aa11;
+}
+
+.nav-link.active {
+  color: #e6aa11;
+}
+
+/* RIGHT */
+.sign-in {
+  text-decoration: none;
+  font-size: 25px;
+  color: rgba(107, 114, 128, 255);
+  font-weight: 400;
+}
+
+.sign-in:hover {
+  color: #e6aa11;
+}
+
+.sign-up {
+  text-decoration: none;
+  background: rgba(107, 114, 128, 255);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 25px;
+  font-weight: 400;
+  transition: background 0.2s ease;
+}
+
+.sign-up:hover {
+  background: #e6aa11;
+}
