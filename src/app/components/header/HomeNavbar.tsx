@@ -1,4 +1,4 @@
-import { Box, Stack, Container, Button, Typography, TextField } from "@mui/material";
+import { Box, Stack, Container, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import "../../../css/navbar.css";
 
@@ -6,7 +6,7 @@ export function HomeNavbar () {
   const authMember = null;
 
   return (
-    <Box className="navbar">
+    <div className="navbar">
       <Container maxWidth="lg">
         <Stack
           direction="row"
@@ -70,6 +70,6 @@ export function HomeNavbar () {
           </Stack>
         </Stack>
       </Container>
-    </Box>
+    </div>
   );
 };

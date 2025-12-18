@@ -5,18 +5,14 @@ import { BookingPage } from './screens/bookingPage';
 import { HelpPage } from './screens/helpPage';
 import { UserPage } from './screens/userPage';
 import "../css/app.css";
-import { HomeNavbar } from './components/headers/HomeNavbar';
-import { OtherNavbar } from './components/headers/OtherNavbar';
+import { HomeNavbar } from './components/header/HomeNavbar';
 import { Footer } from './components/footer';
 import HomePage from './screens/homePage';
 
 function App() {
-  const location = useLocation();
-  console.log("location:", location);
-  
   return (
     <>
-      {location.pathname === '/' ? <HomeNavbar /> : <OtherNavbar />}
+      <HomeNavbar />
         <Switch>
           <Route path="/vehicles">
             <VehiclesPage />
@@ -34,7 +30,7 @@ function App() {
             <HomePage />
           </Route>
         </Switch>
-        <Footer />
+      <Footer />
     </>
   );
 }
