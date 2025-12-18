@@ -66,6 +66,15 @@
 .hero-car {
   width: 100%;
   object-fit: contain;
+  -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.hero-car:hover {
+  -webkit-transform: scale(1.3);
+	transform: scale(1.3);
 }
 
 /* SEARCH */
@@ -94,4 +103,123 @@
   font-size: 16px !important;
   font-weight: 500 !important;
   text-transform: none !important;
+}
+
+/** BRAND ROW*/
+.brand-row {
+  padding: 35px 0;
+  background: rgba(249, 250, 251, 0.5);
+}
+
+.brand-item {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.brand-item:hover {
+  opacity: 1;
+}
+
+.brand-item img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.brand-item p {
+  font-size: 24px;
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: 1px;
+}
+
+/** POPULAR VEHICLES*/
+.top-rated-section {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+.popular-text {
+  color: #3b82f6;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.section-title {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.vehicle-card {
+  width: 100%;
+  border-radius: 16px !important;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.vehicle-image {
+  height: 160px;
+  object-fit: cover;
+  -webkit-transform: scale(1.5);
+	transform: scale(1.5);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.vehicle-image:hover {
+  -webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 6px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.favorite:hover {
+  color: #e61111;
+}
+
+.vehicle-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.vehicle-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.specs span {
+  font-size: 12px;
+  color: #3b82f6;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.price span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.rent-btn {
+  background: rgba(107, 114, 128, 1) !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
 }
