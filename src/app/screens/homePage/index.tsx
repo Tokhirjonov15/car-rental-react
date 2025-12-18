@@ -5,6 +5,8 @@ import { MainHome } from "./MainHome";
 import PopularVehicles from "./PopularVehicles";
 import AboutUs from "./AboutUs";
 import { HowItWorks } from "./HowItWorks";
+import { Events } from "./Events";
+import { MobileAppDownload } from "./MobileDownload";
 
 export default function HomePage () {
   return <div className="homepage">
@@ -12,6 +14,8 @@ export default function HomePage () {
     <HowItWorks />
     <BrandRow />
     <PopularVehicles />
+    <Events />
     <AboutUs />
+    <MobileAppDownload />
   </div>
 }

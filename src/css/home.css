@@ -223,7 +223,7 @@
 
 /** ABOUT US*/
 .why-section {
-  background: #ffffff;
+  background: rgba(249, 250, 251, 0.5);
 }
 
 .why-wrapper {
@@ -523,5 +523,555 @@
   
   .step-card:hover {
     transform: none;
+  }
+}
+
+/* EVENTS*/
+.special-offers-section {
+  height: auto;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .special-offers-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+.special-offers-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.offers-header {
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.offers-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.offers-icon {
+  font-size: 32px;
+  color: rgba(107, 114, 128, 1);
+}
+
+.offers-subtitle {
+  color: rgba(107, 114, 128, 1);
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.offers-title {
+  font-weight: 700;
+  text-align: center;
+  font-size: 2rem;
+  color: rgba(107, 114, 128, 1);
+}
+
+@media (min-width: 900px) {
+  .offers-title {
+    font-size: 2.5rem;
+  }
+}
+
+.offers-description {
+  text-align: center;
+  color: rgba(107, 114, 128, 1);
+  max-width: 600px;
+  font-size: 1.1rem;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 900px) {
+  .offers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.offer-card {
+  height: 100%;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.offer-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.discount-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(238, 90, 111, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.badge-icon {
+  font-size: 16px;
+}
+
+.badge-text {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.offer-image {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.category-chip-wrapper {
+  position: absolute;
+  top: 180px;
+  right: 16px;
+  z-index: 2;
+}
+
+.category-chip {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(10px);
+  border: none !important;
+}
+
+.offer-content {
+  padding: 24px !important;
+}
+
+.offer-title {
+  font-weight: 700;
+  margin-bottom: 8px !important;
+  color: #1a1a1a;
+}
+
+.offer-description {
+  color: #666;
+  margin-bottom: 16px !important;
+  line-height: 1.6;
+}
+
+.features-list {
+  margin-bottom: 16px !important;
+  flex-wrap: wrap;
+}
+
+.feature-chip {
+  border-color: #e0e0e0 !important;
+  color: #666 !important;
+  font-size: 0.75rem !important;
+}
+
+.price-section {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.original-price {
+  color: #999;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.discounted-price {
+  color: #667eea;
+  font-weight: 700;
+  font-size: 1.75rem !important;
+}
+
+.price-period {
+  color: #666;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+.discount-label {
+  color: #27ae60;
+  font-weight: 600;
+  display: block;
+  margin-top: 4px;
+}
+
+.offer-button {
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.offer-button:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.view-all-wrapper {
+  margin-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.view-all-button {
+  padding: 12px 32px !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: white !important;
+  border-color: white !important;
+  border-width: 2px !important;
+  transition: all 0.3s ease !important;
+}
+
+.view-all-button:hover {
+  background-color: white !important;
+  color: #667eea !important;
+  border-color: white !important;
+  transform: translateY(-2px);
+}
+
+/* Card entrance animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.offer-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.offer-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.offer-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.offer-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.offer-button:focus-visible,
+.view-all-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .offer-card,
+  .offer-image,
+  .discount-badge,
+  .offer-button,
+  .view-all-button {
+    animation: none;
+    transition: none;
+  }
+  
+  .offer-card:hover {
+    transform: none;
+  }
+  
+  .offer-card:hover .offer-image {
+    transform: none;
+  }
+}
+
+/* MOBILE DOWNLOAD SECTION*/
+.mobile-app-section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .mobile-app-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+.app-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 899px) {
+  .app-content-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.app-text-content {
+  flex: 1;
+  max-width: 550px;
+}
+
+@media (max-width: 899px) {
+  .app-text-content {
+    max-width: 100%;
+  }
+}
+
+.app-title {
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+@media (min-width: 900px) {
+  .app-title {
+    font-size: 2.75rem;
+  }
+}
+
+@media (max-width: 599px) {
+  .app-title {
+    font-size: 1.875rem;
+  }
+}
+
+.app-description {
+  color: #4b5563;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.app-buttons {
+  margin-top: 32px;
+}
+
+@media (max-width: 899px) {
+  .app-buttons {
+    justify-content: center;
+  }
+}
+
+.store-button {
+  padding: 12px 24px !important;
+  border-radius: 12px !important;
+  text-transform: none !important;
+  background-color: #000 !important;
+  color: white !important;
+  min-width: 200px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+}
+
+.store-button:hover {
+  background-color: #1a1a1a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.store-button:active {
+  transform: translateY(0);
+}
+
+.store-icon {
+  font-size: 32px !important;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.button-label {
+  font-size: 0.625rem !important;
+  letter-spacing: 0.5px;
+  font-weight: 400 !important;
+  opacity: 0.9;
+  line-height: 1.2;
+}
+
+.button-store {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.app-image-wrapper {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 899px) {
+  .app-image-wrapper {
+    max-width: 100%;
+    margin-top: 32px;
+  }
+}
+
+.app-mockup-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.app-mockup-image:hover {
+  transform: scale(1.05);
+}
+
+/* Add phone frame effect */
+.app-image-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 20px);
+  max-width: 420px;
+  height: calc(100% + 20px);
+  border-radius: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: -1;
+  opacity: 0.2;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-text-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.app-image-wrapper {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Button hover animation */
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+.store-button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .app-text-content,
+  .app-image-wrapper,
+  .store-button,
+  .app-mockup-image {
+    animation: none;
+    transition: none;
+  }
+  
+  .store-button:hover,
+  .app-mockup-image:hover {
+    transform: none;
+  }
+}
+
+@media print {
+  .mobile-app-section {
+    background: white;
+  }
+  
+  .store-button {
+    display: none;
   }
 }
