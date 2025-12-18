@@ -7,6 +7,7 @@ import AboutUs from "./AboutUs";
 import { HowItWorks } from "./HowItWorks";
 import { Events } from "./Events";
 import { MobileAppDownload } from "./MobileDownload";
+import { Footer } from "../../components/footer";
 
 export default function HomePage () {
   return <div className="homepage">

@@ -15,12 +15,12 @@ export function MobileAppDownload ()  {
   const GOOGLE_PLAY_URL = 'https://play.google.com'; 
 
   return (
-    <Box className="mobile-app-section">
+    <div className="mobile-app-section">
       <Container maxWidth="lg">
         <Box className="app-content-wrapper">
           <Box className="app-text-content">
             <Typography variant="h2" component="h2" className="app-title">
-              Download the RentGo Mobile App
+              Download the MeirtRentGo Mobile App
             </Typography>
             <Typography variant="h2" className="app-description">
               Book a car on the go with our mobile app. Available for iOS and Android devices.
@@ -74,6 +74,6 @@ export function MobileAppDownload ()  {
           </Box>
         </Box>
       </Container>
-    </Box>
+    </div>
   );
 };

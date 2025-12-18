@@ -37,10 +37,10 @@ import "../../../css/home.css";
 
   export function HowItWorks () {
   return (
-    <Box className="how-it-works-section">
-      <Container maxWidth="lg">
+    <Container className="how-it-works-section">
+      <Stack spacing={6}>
         <Stack spacing={2} alignItems="center" className="section-header">
-          <Typography variant="overline" className="section-subtitle">
+          <Typography className="section-subtitle">
             SIMPLE PROCESS
           </Typography>
           <Typography variant="h2" component="h2" className="section-title">
@@ -84,16 +84,17 @@ import "../../../css/home.css";
             </Box>
           ))}
         </Stack>
-
         <Stack alignItems="center" className="cta-wrapper">
           <Button
+            variant="contained"
+            size="large"
             endIcon={<ArrowForwardIcon />}
             className="cta-button"
           >
             Start Your Journey
           </Button>
         </Stack>
-      </Container>
-    </Box>
+      </Stack>
+    </Container>
   );
 };

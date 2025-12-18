@@ -68,9 +68,8 @@ interface Offer {
 
   export function Events () {
   return (
-    <Box className="special-offers-section">
+    <div className="special-offers-section">
       <Container maxWidth="lg">
-        {/* Section Header */}
         <Stack spacing={2} alignItems="center" className="offers-header">
           <Box className="offers-icon-wrapper">
             <LocalOfferIcon className="offers-icon" />
@@ -86,27 +85,21 @@ interface Offer {
           </Typography>
         </Stack>
 
-        {/* Offers Grid - Using CSS Grid */}
         <Box className="offers-grid">
           {offers.map((offer) => (
             <Card key={offer.id} className="offer-card">
-              {/* Discount Badge */}
               <Box className="discount-badge">
                 <LocalOfferIcon className="badge-icon" />
                 <Typography variant="caption" className="badge-text">
                   {offer.badge}
                 </Typography>
               </Box>
-
-              {/* Car Image */}
               <CardMedia
                 component="img"
                 image={offer.image}
                 alt={offer.title}
                 className="offer-image"
               />
-
-              {/* Category Chip */}
               <Box className="category-chip-wrapper">
                 <Chip
                   label={offer.category}
@@ -116,17 +109,12 @@ interface Offer {
               </Box>
 
               <CardContent className="offer-content">
-                {/* Title */}
                 <Typography variant="h5" component="h3" className="offer-title">
                   {offer.title}
                 </Typography>
-
-                {/* Description */}
                 <Typography variant="body2" className="offer-description">
                   {offer.description}
                 </Typography>
-
-                {/* Features */}
                 <Stack direction="row" spacing={1} className="features-list">
                   {offer.features.map((feature, index) => (
                     <Chip
@@ -139,7 +127,6 @@ interface Offer {
                   ))}
                 </Stack>
 
-                {/* Price Section */}
                 <Box className="price-section">
                   <Stack direction="row" alignItems="center" spacing={1}>
                     <Typography variant="h6" className="original-price">
@@ -156,8 +143,6 @@ interface Offer {
                     Save ${offer.originalPrice - offer.discountedPrice}/day
                   </Typography>
                 </Box>
-
-                {/* CTA Button */}
                 <Button
                   variant="contained"
                   fullWidth
@@ -171,7 +156,6 @@ interface Offer {
           ))}
         </Box>
 
-        {/* View All Deals Button */}
         <Stack alignItems="center" className="view-all-wrapper">
           <Button
             variant="outlined"
@@ -183,6 +167,6 @@ interface Offer {
           </Button>
         </Stack>
       </Container>
-    </Box>
+    </div>
   );
 };

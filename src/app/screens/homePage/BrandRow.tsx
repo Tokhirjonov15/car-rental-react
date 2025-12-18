@@ -11,7 +11,7 @@ const brands = [
 
 export default function BrandRow() {
   return (
-    <Box className="brand-row">
+    <div className="brand-row">
       <Container maxWidth="lg">
         <Stack
           direction="row"
@@ -35,6 +35,6 @@ export default function BrandRow() {
           ))}
         </Stack>
       </Container>
-    </Box>
+    </div>
   );
 }

@@ -41,9 +41,8 @@ export default function PopularVehicles() {
   const [page, setPage] = useState(1);
 
   return (
-    <Box className="top-rated-section">
+    <div className="top-rated-section">
       <Container maxWidth="lg">
-        {/* Header */}
         <Stack direction="row" justifyContent="space-between" alignItems="center" mb={4}>
           <Box>
             <Typography className="popular-text">POPULAR DEALS</Typography>
@@ -52,8 +51,6 @@ export default function PopularVehicles() {
             </Typography>
           </Box>
         </Stack>
-
-        {/* Cards */}
         <Stack direction="row" spacing={3}>
           {vehicles.map((car) => (
             <Card key={car.id} className="vehicle-card">
@@ -66,7 +63,6 @@ export default function PopularVehicles() {
                 />
                 <span className="favorite">♡</span>
               </Box>
-
               <CardContent>
                 <Typography className="vehicle-name">{car.name}</Typography>
                 <Typography className="vehicle-subtitle">{car.subtitle}</Typography>
@@ -76,7 +72,6 @@ export default function PopularVehicles() {
                     <span key={i}>{spec}</span>
                   ))}
                 </Stack>
-
                 <Stack direction="row" justifyContent="space-between" alignItems="center" mt={2}>
                   <Typography className="price">
                     ${car.price} <span>/day</span>
@@ -87,8 +82,6 @@ export default function PopularVehicles() {
             </Card>
           ))}
         </Stack>
-
-        {/* Pagination */}
         <Stack alignItems="center" mt={8}>
           <Pagination
             count={3}
@@ -99,6 +92,6 @@ export default function PopularVehicles() {
           />
         </Stack>
       </Container>
-    </Box>
+    </div>
   );
 }

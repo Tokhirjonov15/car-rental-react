@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Box, Stack, Typography, Button, Container } from "@mui/material";
 import { useState } from "react";
 import "../../../css/home.css";
 
@@ -6,8 +6,8 @@ export default function AboutUs() {
   const [open, setOpen] = useState(false);
 
   return (
-    <Box className="why-section">
-      <Box className="why-wrapper">
+    <div className="why-section">
+      <Container className="why-wrapper">
         <Stack direction="row" spacing={6} alignItems="center">
           <Box className="why-image">
             <img src="/img/aboutus.png" alt="Driving" />
@@ -131,7 +131,7 @@ export default function AboutUs() {
             </Button>
           </Box>
         </Stack>
-      </Box>
-    </Box>
+      </Container>
+    </div>
   );
 }
