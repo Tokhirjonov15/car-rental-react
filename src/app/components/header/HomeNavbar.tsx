@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import "../../../css/navbar.css";
 
 export function HomeNavbar () {
-  const authMember = true;
+  const authMember = null;
 
   return (
     <div className="navbar">

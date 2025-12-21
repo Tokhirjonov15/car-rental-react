@@ -1,8 +1,3 @@
-/* ============================================
-   SIMPLE FOOTER - MINIMAL STYLES
-   ============================================ */
-
-/* Footer Container */
 .footer-section {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   color: #e5e7eb;
@@ -10,28 +5,12 @@
   padding-bottom: 32px;
 }
 
-/* ============================================
-   MAIN FOOTER CONTENT
-   ============================================ */
-
 .footer-content {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 64px;
   margin-bottom: 40px;
 }
-
-/* Mobile: Stack vertically */
-@media (max-width: 899px) {
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
-
-/* ============================================
-   COMPANY BRAND & ABOUT
-   ============================================ */
 
 .footer-brand {
   display: flex;
@@ -80,11 +59,12 @@
   gap: 24px;
 }
 
-.section-title {
-  color: white;
+.contact-section .section-title {
+  color: #ffffff;
   font-weight: 600;
   font-size: 1.25rem;
   margin-bottom: 8px;
+  font-size: 20px;
 }
 
 .contact-list {
@@ -132,8 +112,9 @@
 }
 
 .copyright-text {
-  color: #9ca3af;
+  color: #ffffff;
   font-size: 0.875rem;
+  font-size: 20px;
 }
 
 @keyframes fadeInUp {
