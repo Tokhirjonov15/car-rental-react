@@ -48,18 +48,6 @@ export function MainHome() {
             <img src="/img/tesla.png" alt="car" className="hero-car" />
           </Box>
         </Stack>
-
-        <Box className="search-box">
-          <Stack direction="row" spacing={2} alignItems="center">
-            <TextField
-              placeholder="Search your location..."
-              className="search-input"
-            />
-            <TextField value="Tue 15 Feb, 09:00" className="search-input" />
-            <TextField value="Thu 18 Feb, 11:00" className="search-input" />
-            <Button className="search-btn">Search Car</Button>
-          </Stack>
-        </Box>
       </Container>
     </div>
   );

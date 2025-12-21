@@ -5,52 +5,46 @@
   background-color: #f8f9fa;
 }
 
-.page-header {
+.booking-page .page-header {
   text-align: center;
   margin-bottom: 24px;
 }
 
-.page-title {
+.booking-page .page-title {
   font-weight: 700;
   font-size: 2rem;
   color: #1a1a1a;
   margin-bottom: 8px;
 }
 
-.page-subtitle {
+.booking-page .page-subtitle {
   color: #666;
   font-size: 1rem;
 }
 
-.booking-content {
+.booking-page .booking-content {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 32px;
+  animation: fadeInUp 0.6s ease-out;
 }
 
-@media (max-width: 1024px) {
-  .booking-content {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-}
-
-.booking-form {
+.booking-page .booking-form {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.form-section {
+.booking-page .form-section {
   border-radius: 16px !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-.form-section .MuiCardContent-root {
+.booking-page .form-section .MuiCardContent-root {
   padding: 28px !important;
 }
 
-.section-title {
+.booking-page .section-title {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -60,46 +54,46 @@
   font-size: 1.125rem;
 }
 
-.section-icon {
+.booking-page .section-icon {
   color: #667eea;
   font-size: 24px;
 }
 
-.form-fields {
+.booking-page .form-fields {
   margin-top: 8px;
 }
 
-.field-label {
+.booking-page .field-label {
   color: #666;
   font-weight: 600;
   margin-bottom: 8px;
   display: block;
 }
 
-.date-time-group {
+.booking-page .date-time-group {
   margin-bottom: 16px;
 }
 
-.date-input,
-.time-input,
-.text-input,
-.select-input {
+.booking-page .date-input,
+.booking-page .time-input,
+.booking-page .text-input,
+.booking-page .select-input {
   background-color: #f8f9fa;
   border-radius: 8px;
 }
 
-.input-icon {
+.booking-page .input-icon {
   color: #999;
   font-size: 20px;
   margin-right: 8px;
 }
 
-.duration-display {
+.booking-page .duration-display {
   text-align: center;
   margin-top: 8px;
 }
 
-.duration-chip {
+.booking-page .duration-chip {
   background-color: #e3f2fd !important;
   color: #1976d2 !important;
   font-weight: 600 !important;
@@ -107,50 +101,43 @@
   height: auto !important;
 }
 
-.payment-note {
+.booking-page .payment-note {
   background-color: #f0f7ff;
   padding: 12px;
   border-radius: 8px;
   border-left: 4px solid #667eea;
 }
 
-.note-text {
+.booking-page .note-text {
   color: #666;
   font-size: 0.875rem;
   line-height: 1.5;
 }
 
-.booking-summary {
+.booking-page .booking-summary {
   height: fit-content;
   position: sticky;
   top: 100px;
 }
 
-@media (max-width: 1024px) {
-  .booking-summary {
-    position: relative;
-    top: 0;
-  }
-}
-
-.summary-card {
+.booking-page .summary-card {
   border-radius: 16px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
   border: 2px solid #e0e0e0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
-.summary-card .MuiCardContent-root {
+.booking-page .summary-card .MuiCardContent-root {
   padding: 28px !important;
 }
 
-.summary-title {
+.booking-page .summary-title {
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 20px;
   font-size: 1.25rem;
 }
 
-.car-info {
+.booking-page .car-info {
   display: flex;
   gap: 16px;
   align-items: center;
@@ -162,97 +149,85 @@
   height: 70px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transform: scale(1) !important;
-  transition: none !important;
-  will-change: auto !important;
 }
 
-.car-name {
+.booking-page .car-name {
   font-weight: 600;
   color: #1a1a1a;
   font-size: 1.125rem;
   margin-bottom: 4px;
 }
 
-.car-category {
+.booking-page .car-category {
   color: #999;
   font-size: 0.875rem;
 }
 
-.summary-divider {
+.booking-page .summary-divider,
+.booking-page .total-divider {
   margin: 20px 0 !important;
   border-color: #e0e0e0 !important;
 }
 
-.total-divider {
-  margin: 12px 0 !important;
-  border-color: #e0e0e0 !important;
-}
-
-.rental-details {
+.booking-page .rental-details {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.detail-row {
+.booking-page .detail-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
 }
 
-.detail-label {
+.booking-page .detail-label {
   color: #666;
   font-size: 0.875rem;
-  flex: 1;
 }
 
-.detail-value {
+.booking-page .detail-value {
   color: #1a1a1a;
   font-weight: 500;
   font-size: 0.875rem;
   text-align: right;
-  flex: 1;
 }
 
-.price-breakdown {
+.booking-page .price-breakdown {
   margin-top: 8px;
 }
 
-.breakdown-title {
+.booking-page .breakdown-title {
   font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 12px;
 }
 
-.price-row {
+.booking-page .price-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 10px;
 }
 
-.price-value {
+.booking-page .price-value {
   font-weight: 500;
   color: #1a1a1a;
 }
 
-.total-row {
+.booking-page .total-row {
   margin-top: 12px;
 }
 
-.total-label {
+.booking-page .total-label {
   font-weight: 700;
-  color: #1a1a1a;
 }
 
-.total-price {
+.booking-page .total-price {
   font-weight: 700;
   color: #667eea;
   font-size: 1.75rem;
 }
 
-.confirm-button {
+.booking-page .confirm-button {
   margin-top: 24px !important;
   margin-bottom: 12px !important;
   padding: 14px 24px !important;
@@ -261,53 +236,29 @@
   font-size: 1rem !important;
   font-weight: 600 !important;
   background-color: rgba(107, 114, 128, 1) !important;
-  color: white !important;
+  color: #fff !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
 }
 
-.confirm-button:hover {
+.booking-page .confirm-button:hover {
   background-color: rgba(97, 104, 118, 1) !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
   transform: translateY(-2px);
 }
 
-.terms-note {
+.booking-page .terms-note {
   display: block;
   text-align: center;
   color: #999;
   font-size: 0.75rem;
-  line-height: 1.4;
 }
 
-@media (max-width: 1024px) {
-  .booking-summary {
-    order: 2;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  
-  .booking-form {
-    order: 1;
-  }
-}
-
-.booking-content {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.confirm-button:focus-visible {
-  outline: 2px solid #667eea;
-  outline-offset: 2px;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .confirm-button,
-  .booking-content {
-    animation: none;
-    transition: none;
-  }
-  
-  .confirm-button:hover {
-    transform: none;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

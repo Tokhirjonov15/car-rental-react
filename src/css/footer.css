@@ -5,88 +5,79 @@
   padding-bottom: 32px;
 }
 
-.footer-content {
+/* CONTENT */
+.footer-section .footer-content {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 64px;
   margin-bottom: 40px;
 }
 
-.footer-brand {
+.footer-section .footer-brand {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.footer-logo {
+.footer-section .footer-logo {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.logo-icon {
-  font-size: 48px;
-  color: #667eea;
+.footer-section .logo-icon {
+  width: 48px;
+  height: 48px;
 }
 
-.company-name {
+.footer-section .company-name {
   font-weight: 700;
-  color: white;
+  color: #ffffff;
   font-size: 2rem;
   letter-spacing: -0.5px;
 }
 
-@media (max-width: 599px) {
-  .company-name {
-    font-size: 1.75rem;
-  }
-  
-  .logo-icon {
-    font-size: 40px;
-  }
-}
-
-.about-text {
+.footer-section .about-text {
   color: #9ca3af;
   line-height: 1.8;
   font-size: 1rem;
   max-width: 600px;
 }
 
-.contact-section {
+/* CONTACT */
+.footer-section .contact-section {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.contact-section .section-title {
+.footer-section .contact-section .section-title {
   color: #ffffff;
   font-weight: 600;
-  font-size: 1.25rem;
-  margin-bottom: 8px;
   font-size: 20px;
 }
 
-.contact-list {
+.footer-section .contact-list {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.contact-item {
+.footer-section .contact-item {
   display: flex;
   align-items: flex-start;
   gap: 16px;
+  transition: transform 0.3s ease;
 }
 
-.contact-icon {
+.footer-section .contact-icon {
   font-size: 28px;
   color: #667eea;
   margin-top: 4px;
   flex-shrink: 0;
 }
 
-.contact-label {
+.footer-section .contact-label {
   color: #9ca3af;
   font-size: 0.875rem;
   font-weight: 500;
@@ -95,29 +86,39 @@
   letter-spacing: 0.5px;
 }
 
-.contact-value {
+.footer-section .contact-value {
   color: #e5e7eb;
   font-size: 1rem;
   line-height: 1.6;
 }
 
-.footer-divider {
+/* HOVER */
+.footer-section .contact-item:hover {
+  transform: translateX(4px);
+}
+
+.footer-section .contact-item:hover .contact-icon {
+  color: #5568d3;
+}
+
+/* DIVIDER & BOTTOM */
+.footer-section .footer-divider {
   border-color: rgba(255, 255, 255, 0.1);
   margin: 32px 0;
 }
 
-.footer-bottom {
+.footer-section .footer-bottom {
   text-align: center;
   padding-top: 16px;
 }
 
-.copyright-text {
+.footer-section .copyright-text {
   color: #ffffff;
-  font-size: 0.875rem;
   font-size: 20px;
 }
 
-@keyframes fadeInUp {
+/* ANIMATION */
+@keyframes footerFadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -128,61 +129,11 @@
   }
 }
 
-.footer-brand {
-  animation: fadeInUp 0.6s ease-out;
+.footer-section .footer-brand {
+  animation: footerFadeInUp 0.6s ease-out;
 }
 
-.contact-section {
-  animation: fadeInUp 0.6s ease-out 0.2s;
+.footer-section .contact-section {
+  animation: footerFadeInUp 0.6s ease-out 0.2s;
   animation-fill-mode: both;
-}
-
-.contact-item {
-  transition: transform 0.3s ease;
-}
-
-.contact-item:hover {
-  transform: translateX(4px);
-}
-
-.contact-item:hover .contact-icon {
-  color: #5568d3;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .footer-brand,
-  .contact-section,
-  .contact-item {
-    animation: none;
-    transition: none;
-  }
-  
-  .contact-item:hover {
-    transform: none;
-  }
-}
-
-@media print {
-  .footer-section {
-    background: white;
-    color: black;
-  }
-  
-  .company-name,
-  .section-title,
-  .contact-value {
-    color: black;
-  }
-  
-  .about-text,
-  .contact-label,
-  .copyright-text {
-    color: #333;
-  }
-  
-  .logo-icon,
-  .contact-icon {
-    color: #667eea;
-  }
 }

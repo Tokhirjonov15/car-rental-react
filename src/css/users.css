@@ -1,18 +1,9 @@
-/* ============================================
-   PROFILE PAGE - SCOPED STYLES (Parent-Child)
-   ============================================ */
-
-/* Page Container */
 .profile-page {
   padding-top: 40px;
   padding-bottom: 60px;
   min-height: 100vh;
   background-color: #f8f9fa;
 }
-
-/* ============================================
-   PAGE HEADER
-   ============================================ */
 
 .profile-page .page-header {
   text-align: center;
@@ -30,10 +21,6 @@
   color: #666;
   font-size: 1rem;
 }
-
-/* ============================================
-   PROFILE PHOTO CARD
-   ============================================ */
 
 .profile-page .profile-card {
   border-radius: 16px !important;
@@ -71,10 +58,6 @@
   color: #1a1a1a;
 }
 
-/* ============================================
-   INFO CARDS
-   ============================================ */
-
 .profile-page .info-card {
   border-radius: 16px !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
@@ -90,10 +73,6 @@
   margin-bottom: 24px;
   font-size: 1.25rem;
 }
-
-/* ============================================
-   FORM FIELDS
-   ============================================ */
 
 .profile-page .info-card .form-fields {
   margin-top: 8px;
@@ -112,10 +91,6 @@
   font-size: 22px;
   margin-right: 12px;
 }
-
-/* ============================================
-   ACTION BUTTONS
-   ============================================ */
 
 .profile-page .action-buttons {
   margin-top: 16px;
@@ -153,71 +128,6 @@
   background-color: #f8f9fa !important;
 }
 
-/* ============================================
-   RESPONSIVE ADJUSTMENTS
-   ============================================ */
-
-@media (max-width: 768px) {
-  .profile-page {
-    padding-top: 24px;
-    padding-bottom: 40px;
-  }
-
-  .profile-page .page-header .page-title {
-    font-size: 1.75rem;
-  }
-
-  .profile-page .profile-card .avatar-wrapper .profile-avatar {
-    width: 100px !important;
-    height: 100px !important;
-  }
-
-  .profile-page .info-card .MuiCardContent-root {
-    padding: 24px !important;
-  }
-
-  .profile-page .action-buttons {
-    flex-direction: column;
-  }
-
-  .profile-page .action-buttons .save-btn,
-  .profile-page .action-buttons .cancel-btn {
-    width: 100%;
-  }
-}
-
-@media (max-width: 599px) {
-  .profile-page .page-header {
-    text-align: left;
-  }
-
-  .profile-page .page-header .page-title {
-    font-size: 1.5rem;
-  }
-
-  .profile-page .info-card .section-title {
-    font-size: 1.125rem;
-  }
-
-  .profile-page .profile-card .avatar-wrapper .profile-avatar {
-    width: 90px !important;
-    height: 90px !important;
-  }
-
-  .profile-page .profile-card .avatar-wrapper .change-photo-btn {
-    width: 36px !important;
-    height: 36px !important;
-  }
-
-  .profile-page .info-card .MuiCardContent-root {
-    padding: 20px !important;
-  }
-}
-
-/* ============================================
-   ANIMATIONS
-   ============================================ */
-
 @keyframes profileFadeInUp {
   from {
     opacity: 0;
@@ -252,10 +162,6 @@
 .profile-page > *:nth-child(5) {
   animation-delay: 0.5s;
 }
-
-/* ============================================
-   ACCESSIBILITY
-   ============================================ */
 
 .profile-page .action-buttons .save-btn:focus-visible,
 .profile-page .action-buttons .cancel-btn:focus-visible,

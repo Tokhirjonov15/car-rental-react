@@ -13,7 +13,6 @@ export function HomeNavbar () {
           alignItems="center"
           justifyContent="space-between"
         >
-          {/* LEFT */}
           <Stack direction="row" alignItems="center" spacing={2.5}>
             <Box className="logo-icon">
               <img
@@ -25,7 +24,6 @@ export function HomeNavbar () {
             <Box className="logo-text">MeritRentGo</Box>
           </Stack>
 
-          {/* CENTER */}
           <Stack direction="row" spacing={4}>
             <NavLink to="/" className="nav-link">
               Home
@@ -48,7 +46,6 @@ export function HomeNavbar () {
             </NavLink>       
           </Stack>
 
-          {/* RIGHT */}
           <Stack
             direction="row"
             alignItems="center"
