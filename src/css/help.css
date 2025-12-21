@@ -1,0 +1,137 @@
+.help-page {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.help-page .page-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.help-page .page-header .page-title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.help-page .page-header .page-subtitle {
+  color: #666;
+  font-size: 1.125rem;
+}
+
+.help-page .help-section {
+  margin-bottom: 24px;
+}
+
+.help-page .help-section .section-header {
+  margin-bottom: 24px;
+}
+
+.help-page .help-section .section-header .section-icon {
+  font-size: 36px;
+  color: rgba(107, 114, 128, 1);
+}
+
+.help-page .help-section .section-header .section-title {
+  font-weight: 700;
+  color: #1a1a1a;
+  font-size: 1.75rem;
+}
+
+.help-page .section-divider {
+  margin: 48px 0 !important;
+  border-color: #e0e0e0 !important;
+}
+
+.help-page .accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.help-page .faq-accordion {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #e0e0e0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.help-page .faq-accordion:before {
+  display: none !important;
+}
+
+.help-page .faq-accordion:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(107, 114, 128, 0.3) !important;
+}
+
+.help-page .faq-accordion.Mui-expanded {
+  margin: 0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(107, 114, 128, 1) !important;
+}
+
+.help-page .faq-accordion .accordion-summary {
+  padding: 20px 24px;
+}
+
+.help-page .faq-accordion .accordion-summary .faq-question {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 1.05rem;
+}
+
+.help-page .faq-accordion .accordion-details {
+  padding: 0 24px 24px 24px;
+}
+
+.help-page .faq-accordion .accordion-details .faq-answer {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.help-page .terms-accordion {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #e0e0e0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.help-page .terms-accordion:before {
+  display: none !important;
+}
+
+.help-page .terms-accordion:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(107, 114, 128, 0.3) !important;
+}
+
+.help-page .terms-accordion.Mui-expanded {
+  margin: 0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(107, 114, 128, 1) !important;
+}
+
+.help-page .terms-accordion .accordion-summary {
+  padding: 20px 24px;
+}
+
+.help-page .terms-accordion .accordion-summary .terms-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 1.05rem;
+}
+
+.help-page .terms-accordion .accordion-details {
+  padding: 0 24px 24px 24px;
+}
+
+.help-page .terms-accordion .accordion-details .terms-content {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}

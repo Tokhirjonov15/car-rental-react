@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
-import { HelpPage } from './screens/helpPage';
 import { HomeNavbar } from './components/header/HomeNavbar';
 import { Footer } from './components/footer';
 import HomePage from './screens/homePage';
 import VehiclesPage from './screens/vehiclesPage';
 import BookingPage from './screens/bookingPage';
 import UserPage from './screens/userPage';
+import HelpPage from './screens/helpPage';
 import "../css/app.css";
 
 function App() {
