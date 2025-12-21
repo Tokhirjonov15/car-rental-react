@@ -1,0 +1,310 @@
+.booking-page {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  color: #666;
+  font-size: 1rem;
+}
+
+.booking-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 1024px) {
+  .booking-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-section {
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.form-section .MuiCardContent-root {
+  padding: 28px !important;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 1.125rem;
+}
+
+.section-icon {
+  color: #667eea;
+  font-size: 24px;
+}
+
+.form-fields {
+  margin-top: 8px;
+}
+
+.field-label {
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.date-time-group {
+  margin-bottom: 16px;
+}
+
+.date-input,
+.time-input,
+.text-input,
+.select-input {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.input-icon {
+  color: #999;
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.duration-display {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.duration-chip {
+  background-color: #e3f2fd !important;
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  height: auto !important;
+}
+
+.payment-note {
+  background-color: #f0f7ff;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.note-text {
+  color: #666;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.booking-summary {
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 1024px) {
+  .booking-summary {
+    position: relative;
+    top: 0;
+  }
+}
+
+.summary-card {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  border: 2px solid #e0e0e0;
+}
+
+.summary-card .MuiCardContent-root {
+  padding: 28px !important;
+}
+
+.summary-title {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+}
+
+.car-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.booking-page .car-image {
+  width: 100px;
+  height: 70px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.car-name {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 1.125rem;
+  margin-bottom: 4px;
+}
+
+.car-category {
+  color: #999;
+  font-size: 0.875rem;
+}
+
+.summary-divider {
+  margin: 20px 0 !important;
+  border-color: #e0e0e0 !important;
+}
+
+.total-divider {
+  margin: 12px 0 !important;
+  border-color: #e0e0e0 !important;
+}
+
+.rental-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.detail-label {
+  color: #666;
+  font-size: 0.875rem;
+  flex: 1;
+}
+
+.detail-value {
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-align: right;
+  flex: 1;
+}
+
+.price-breakdown {
+  margin-top: 8px;
+}
+
+.breakdown-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.price-value {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.total-row {
+  margin-top: 12px;
+}
+
+.total-label {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.total-price {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.75rem;
+}
+
+.confirm-button {
+  margin-top: 24px !important;
+  margin-bottom: 12px !important;
+  padding: 14px 24px !important;
+  border-radius: 12px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.confirm-button:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+.terms-note {
+  display: block;
+  text-align: center;
+  color: #999;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .booking-summary {
+    order: 2;
+  }
+  
+  .booking-form {
+    order: 1;
+  }
+}
+
+.booking-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.confirm-button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .confirm-button,
+  .booking-content {
+    animation: none;
+    transition: none;
+  }
+  
+  .confirm-button:hover {
+    transform: none;
+  }
+}

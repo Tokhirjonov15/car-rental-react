@@ -21,7 +21,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarIcon from '@mui/icons-material/Star';
 import "../../../css/vehicles.css";
 
-export function ChosenVehicle () {
+export default function ChosenVehicle () {
   const carData = {
     id: 1,
     name: 'BMW 3 Series',

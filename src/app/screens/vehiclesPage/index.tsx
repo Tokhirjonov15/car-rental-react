@@ -1,6 +1,6 @@
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Vehicles from "./Vehicles";
-import { ChosenVehicle } from "./ChosenVehicle";
+import ChosenVehicle from "./ChosenVehicle";
 
 
 export default function VehiclesPage() {
