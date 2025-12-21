@@ -170,3 +170,387 @@
   background-color: #274bc8;
   transform: translateY(-2px);
 }
+
+/* CHOSEN VEHICLE*/
+
+.chosen-vehicle-page {
+  padding-top: 40px;
+  margin-bottom: -250px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.back-button {
+  text-transform: none !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  transition: all 0.3s ease !important;
+  width: fit-content !important;
+  display: inline-flex !important;
+}
+
+.back-button:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  color: white !important;
+}
+
+.vehicle-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 1024px) {
+  .vehicle-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.vehicle-images {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.main-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.main-image-wrapper:hover .main-image {
+  transform: scale(1.05);
+}
+
+.unavailable-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(239, 68, 68, 0.9);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  backdrop-filter: blur(10px);
+}
+
+.thumbnail-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+.thumbnail.active {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.vehicle-details {
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 1024px) {
+  .vehicle-details {
+    position: relative;
+    top: 0;
+  }
+}
+
+.vehicle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.category-chip {
+  background-color: #e3f2fd !important;
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+  margin-bottom: 12px !important;
+}
+
+.vehicle-name {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.vehicle-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #fff3e0;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.star-icon {
+  color: #ff9800;
+  font-size: 18px;
+}
+
+.rating Typography {
+  font-weight: 600;
+  color: #f57c00;
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #666;
+}
+
+.location-icon {
+  font-size: 18px;
+  color: #667eea;
+}
+
+.verified-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #27ae60;
+  text-align: center;
+}
+
+.verified-badge svg {
+  font-size: 32px;
+}
+
+.vehicle-description {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.specifications {
+  margin-top: 8px;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  font-size: 1.125rem;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 599px) {
+  .spec-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.spec-item:hover {
+  background-color: #e3f2fd;
+  transform: translateX(4px);
+}
+
+.spec-icon {
+  font-size: 28px;
+  color: #667eea;
+}
+
+.spec-label {
+  color: #999;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.spec-value {
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.features-section {
+  margin-top: 8px;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.feature-chip {
+  border-color: #e0e0e0 !important;
+  color: #666 !important;
+  font-size: 0.875rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.feature-chip:hover {
+  border-color: #667eea !important;
+  background-color: #e3f2fd !important;
+  color: #667eea !important;
+}
+
+.booking-card {
+  position: static;
+  margin-top: 20px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  border-radius: 12px !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1) !important;
+  background-color: white;
+}
+
+.booking-card .MuiCardContent-root {
+  padding: 24px 32px !important;
+}
+
+@media (max-width: 599px) {
+  .booking-card .MuiCardContent-root {
+    padding: 16px !important;
+  }
+}
+
+.price {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 2rem;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.price-period {
+  color: #999;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.price-note {
+  color: #999;
+  font-size: 0.75rem;
+}
+
+.book-now-button {
+  padding: 12px 32px !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.book-now-button:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+.book-now-button:disabled {
+  background-color: #e0e0e0 !important;
+  color: #999 !important;
+  cursor: not-allowed !important;
+}
+
+.vehicle-content {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.thumbnail:focus-visible,
+.book-now-button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .main-image,
+  .thumbnail,
+  .spec-item,
+  .feature-chip,
+  .book-now-button {
+    transition: none;
+  }
+  
+  .main-image-wrapper:hover .main-image,
+  .thumbnail:hover,
+  .spec-item:hover,
+  .book-now-button:hover {
+    transform: none;
+  }
+  
+  .vehicle-content {
+    animation: none;
+  }
+}

@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SearchIcon from '@mui/icons-material/Search';
 import "../../../css/vehicles.css";
 
 export default function Vehicles () {

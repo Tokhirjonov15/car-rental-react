@@ -1,6 +1,6 @@
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import ChosenVehicle from "./ChosenVehicle";
 import Vehicles from "./Vehicles";
+import { ChosenVehicle } from "./ChosenVehicle";
 
 
 export default function VehiclesPage() {
@@ -9,7 +9,7 @@ export default function VehiclesPage() {
   return (
     <div className="vehicles-page">
       <Switch>
-        <Route path={`${vehicles.path}/:vehicleId`}>
+        <Route path={`${vehicles.path}/:vehicleId` }>
           <ChosenVehicle />
         </Route>
         <Route path={`${vehicles.path}`}>
