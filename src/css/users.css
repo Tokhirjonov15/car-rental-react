@@ -1,0 +1,279 @@
+/* ============================================
+   PROFILE PAGE - SCOPED STYLES (Parent-Child)
+   ============================================ */
+
+/* Page Container */
+.profile-page {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+
+.profile-page .page-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.profile-page .page-header .page-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.profile-page .page-header .page-subtitle {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* ============================================
+   PROFILE PHOTO CARD
+   ============================================ */
+
+.profile-page .profile-card {
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.profile-page .profile-card .avatar-wrapper {
+  position: relative;
+  margin: 8px 0;
+}
+
+.profile-page .profile-card .avatar-wrapper .profile-avatar {
+  width: 120px !important;
+  height: 120px !important;
+  border: 4px solid white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-page .profile-card .avatar-wrapper .change-photo-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.profile-page .profile-card .avatar-wrapper .change-photo-btn:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+}
+
+.profile-page .profile-card .user-name {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ============================================
+   INFO CARDS
+   ============================================ */
+
+.profile-page .info-card {
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.profile-page .info-card .MuiCardContent-root {
+  padding: 32px !important;
+}
+
+.profile-page .info-card .section-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  font-size: 1.25rem;
+}
+
+/* ============================================
+   FORM FIELDS
+   ============================================ */
+
+.profile-page .info-card .form-fields {
+  margin-top: 8px;
+}
+
+.profile-page .info-card .form-fields .input-field {
+  background-color: #f8f9fa;
+}
+
+.profile-page .info-card .form-fields .input-field .MuiOutlinedInput-root {
+  border-radius: 12px;
+}
+
+.profile-page .info-card .form-fields .input-icon {
+  color: #999;
+  font-size: 22px;
+  margin-right: 12px;
+}
+
+/* ============================================
+   ACTION BUTTONS
+   ============================================ */
+
+.profile-page .action-buttons {
+  margin-top: 16px;
+}
+
+.profile-page .action-buttons .save-btn {
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  padding: 12px 40px !important;
+  border-radius: 12px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  min-width: 150px !important;
+}
+
+.profile-page .action-buttons .save-btn:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.profile-page .action-buttons .cancel-btn {
+  padding: 12px 40px !important;
+  border-radius: 12px !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  color: #666 !important;
+  border-color: #e0e0e0 !important;
+  min-width: 150px !important;
+}
+
+.profile-page .action-buttons .cancel-btn:hover {
+  border-color: #999 !important;
+  background-color: #f8f9fa !important;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .profile-page {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+
+  .profile-page .page-header .page-title {
+    font-size: 1.75rem;
+  }
+
+  .profile-page .profile-card .avatar-wrapper .profile-avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .profile-page .info-card .MuiCardContent-root {
+    padding: 24px !important;
+  }
+
+  .profile-page .action-buttons {
+    flex-direction: column;
+  }
+
+  .profile-page .action-buttons .save-btn,
+  .profile-page .action-buttons .cancel-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 599px) {
+  .profile-page .page-header {
+    text-align: left;
+  }
+
+  .profile-page .page-header .page-title {
+    font-size: 1.5rem;
+  }
+
+  .profile-page .info-card .section-title {
+    font-size: 1.125rem;
+  }
+
+  .profile-page .profile-card .avatar-wrapper .profile-avatar {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .profile-page .profile-card .avatar-wrapper .change-photo-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .profile-page .info-card .MuiCardContent-root {
+    padding: 20px !important;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes profileFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-page > * {
+  animation: profileFadeInUp 0.5s ease-out;
+}
+
+.profile-page > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.profile-page > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.profile-page > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.profile-page > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.profile-page > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.profile-page .action-buttons .save-btn:focus-visible,
+.profile-page .action-buttons .cancel-btn:focus-visible,
+.profile-page .profile-card .avatar-wrapper .change-photo-btn:focus-visible {
+  outline: 2px solid rgba(107, 114, 128, 1);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .profile-page > *,
+  .profile-page .action-buttons .save-btn,
+  .profile-page .action-buttons .cancel-btn {
+    animation: none;
+    transition: none;
+  }
+
+  .profile-page .action-buttons .save-btn:hover {
+    box-shadow: none;
+  }
+}
