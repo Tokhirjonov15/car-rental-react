@@ -33,7 +33,7 @@ export function HomeNavbar () {
             </NavLink>
             {authMember ? (
               <NavLink to="/booking" className="nav-link">
-                Booking
+                My Bookings
               </NavLink>
             ) : null}
             {authMember ? (

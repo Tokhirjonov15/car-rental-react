@@ -4,7 +4,6 @@ import { HomeNavbar } from './components/header/HomeNavbar';
 import { Footer } from './components/footer';
 import HomePage from './screens/homePage';
 import VehiclesPage from './screens/vehiclesPage';
-import BookingPage from './screens/bookingPage';
 import UserPage from './screens/userPage';
 import HelpPage from './screens/helpPage';
 import "../css/app.css";
@@ -17,9 +16,9 @@ function App() {
           <Route path="/vehicles">
             <VehiclesPage />
           </Route>
-          <Route path="/booking">
-            <BookingPage />
-          </Route>
+          {/* <Route path="/myBookings">
+            <BookingsPage />
+          </Route> */}
           <Route path="/help">
             <HelpPage />
           </Route>

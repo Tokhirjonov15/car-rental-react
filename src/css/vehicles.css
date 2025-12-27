@@ -411,3 +411,894 @@
     transform: translateY(0);
   }
 }
+
+/** BOOKING */
+
+.booking-page {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.booking-page .page-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.booking-page .page-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.booking-page .page-subtitle {
+  color: #666;
+  font-size: 1rem;
+}
+
+.booking-page .booking-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.booking-page .booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.booking-page .form-section {
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.booking-page .form-section .MuiCardContent-root {
+  padding: 28px !important;
+}
+
+.booking-page .section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 1.125rem;
+}
+
+.booking-page .section-icon {
+  color: #667eea;
+  font-size: 24px;
+}
+
+.booking-page .form-fields {
+  margin-top: 8px;
+}
+
+.booking-page .field-label {
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.booking-page .date-time-group {
+  margin-bottom: 16px;
+}
+
+.booking-page .date-input,
+.booking-page .time-input,
+.booking-page .text-input,
+.booking-page .select-input {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.booking-page .input-icon {
+  color: #999;
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.booking-page .duration-display {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.booking-page .duration-chip {
+  background-color: #e3f2fd !important;
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  height: auto !important;
+}
+
+.booking-page .payment-note {
+  background-color: #f0f7ff;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.booking-page .note-text {
+  color: #666;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.booking-page .booking-summary {
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.booking-page .summary-card {
+  border-radius: 16px !important;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.booking-page .summary-card .MuiCardContent-root {
+  padding: 28px !important;
+}
+
+.booking-page .summary-title {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+}
+
+.booking-page .car-info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.booking-page .car-image {
+  width: 100px;
+  height: 70px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-page .car-name {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 1.125rem;
+  margin-bottom: 4px;
+}
+
+.booking-page .car-category {
+  color: #999;
+  font-size: 0.875rem;
+}
+
+.booking-page .summary-divider,
+.booking-page .total-divider {
+  margin: 20px 0 !important;
+  border-color: #e0e0e0 !important;
+}
+
+.booking-page .rental-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-page .detail-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-page .detail-label {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.booking-page .detail-value {
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-align: right;
+}
+
+.booking-page .price-breakdown {
+  margin-top: 8px;
+}
+
+.booking-page .breakdown-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.booking-page .price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.booking-page .price-value {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.booking-page .total-row {
+  margin-top: 12px;
+}
+
+.booking-page .total-label {
+  font-weight: 700;
+}
+
+.booking-page .total-price {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.75rem;
+}
+
+.booking-page .confirm-button {
+  margin-top: 24px !important;
+  margin-bottom: 12px !important;
+  padding: 14px 24px !important;
+  border-radius: 12px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
+}
+
+.booking-page .confirm-button:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  transform: translateY(-2px);
+}
+
+.booking-page .terms-note {
+  display: block;
+  text-align: center;
+  color: #999;
+  font-size: 0.75rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/** CARD PAYMENT */
+.payment-page {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.payment-page .back-button {
+  text-transform: none !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  transition: all 0.3s ease !important;
+  width: fit-content !important;
+  display: inline-flex !important;
+}
+
+.payment-page .back-button:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  color: white !important;
+}
+
+.payment-page .page-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.payment-page .page-header .page-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.payment-page .page-header .page-subtitle {
+  color: #666;
+  font-size: 1rem;
+}
+
+.payment-page .success-alert {
+  border-radius: 12px !important;
+  padding: 20px !important;
+  background-color: #d4edda !important;
+  border: 2px solid #28a745 !important;
+}
+
+.payment-page .success-alert .success-title {
+  color: #155724;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.payment-page .success-alert .success-message {
+  color: #155724;
+}
+
+.payment-page .payment-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 1024px) {
+  .payment-page .payment-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.payment-page .payment-form-card {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: 2px solid #e0e0e0;
+}
+
+.payment-page .payment-form-card .MuiCardContent-root {
+  padding: 32px !important;
+}
+
+.payment-page .payment-form-card .card-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.payment-page .payment-form-card .card-header .card-icon {
+  font-size: 32px;
+  color: rgba(107, 114, 128, 1);
+}
+
+.payment-page .payment-form-card .card-header .card-title {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.payment-page .payment-form-card .form-fields {
+  margin-top: 8px;
+}
+
+.payment-page .payment-form-card .form-fields .input-field {
+  background-color: #f8f9fa;
+}
+
+.payment-page .payment-form-card .form-fields .input-field .MuiOutlinedInput-root {
+  border-radius: 12px;
+}
+
+.payment-page .payment-form-card .form-fields .input-icon {
+  color: #999;
+  font-size: 22px;
+  margin-right: 12px;
+}
+
+.payment-page .payment-form-card .security-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #e3f2fd;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.payment-page .payment-form-card .security-note .security-icon {
+  color: #1976d2;
+  font-size: 20px;
+}
+
+.payment-page .payment-form-card .security-note .security-text {
+  color: #1565c0;
+  font-size: 0.875rem;
+}
+
+.payment-page .summary-card {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border: 2px solid rgba(107, 114, 128, 0.2);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 1024px) {
+  .payment-page .summary-card {
+    position: relative;
+    top: 0;
+  }
+}
+
+.payment-page .summary-card .MuiCardContent-root {
+  padding: 28px !important;
+}
+
+.payment-page .summary-card .summary-title {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.payment-page .summary-card .summary-details {
+  margin-bottom: 20px;
+}
+
+.payment-page .summary-card .summary-details .summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-page .summary-card .summary-details .summary-label {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.payment-page .summary-card .summary-details .summary-value {
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.payment-page .summary-card .summary-details .divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 12px 0;
+}
+
+.payment-page .summary-card .summary-details .total-row {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px solid #e0e0e0;
+}
+
+.payment-page .summary-card .summary-details .total-label {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.payment-page .summary-card .summary-details .total-amount {
+  font-weight: 700;
+  color: rgba(107, 114, 128, 1);
+}
+
+.payment-page .summary-card .pay-button {
+  margin-top: 20px !important;
+  padding: 14px 24px !important;
+  border-radius: 12px !important;
+  text-transform: none !important;
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.payment-page .summary-card .pay-button:hover:not(:disabled) {
+  background-color: rgba(97, 104, 118, 1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+.payment-page .summary-card .pay-button:disabled {
+  background-color: #28a745 !important;
+  cursor: not-allowed;
+}
+
+.payment-page .payment-content {
+  animation: paymentFadeInUp 0.6s ease-out;
+}
+
+.payment-page .back-button:focus-visible,
+.payment-page .pay-button:focus-visible {
+  outline: 2px solid rgba(107, 114, 128, 1);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .payment-page .payment-content,
+  .payment-page .success-alert,
+  .payment-page .pay-button {
+    animation: none;
+    transition: none;
+  }
+
+  .payment-page .pay-button:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* BANK TRANSFER PAYMENT */
+
+.bank-transfer-page {
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+}
+
+.bank-transfer-page .back-button {
+  text-transform: none !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  padding: 10px 24px;
+  border-radius: 12px;
+  text-transform: none;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.bank-transfer-page .back-button:hover {
+  background-color: rgba(97, 104, 118, 1) !important;
+  color: white !important;
+}
+
+.bank-transfer-page .page-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.bank-transfer-page .page-header .page-icon {
+  font-size: 64px;
+  color: rgba(107, 114, 128, 1);
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.2));
+}
+
+.bank-transfer-page .page-header .page-title {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 12px;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.bank-transfer-page .page-header .page-subtitle {
+  color: #718096;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bank-transfer-page .notice-card {
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe4b3 100%);
+  border: 2px solid #ffa726;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(255, 167, 38, 0.15);
+}
+
+.bank-transfer-page .notice-card .MuiCardContent-root {
+  padding: 20px;
+}
+
+.bank-transfer-page .notice-card .notice-icon {
+  color: #f57c00;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.bank-transfer-page .notice-card .notice-text {
+  color: #424242;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.bank-transfer-page .notice-card .notice-text strong {
+  color: #e65100;
+  font-weight: 700;
+}
+
+.bank-transfer-page .notice-card .booking-id-chip {
+  background: #ff9800;
+  color: white;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+  margin: 0 4px;
+}
+
+.bank-transfer-page .transfer-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.bank-transfer-page .bank-details-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.bank-transfer-page .bank-details-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.bank-transfer-page .bank-details-card .MuiCardContent-root {
+  padding: 32px;
+}
+
+.bank-transfer-page .bank-details-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #2d3748;
+  font-weight: 700;
+  margin-bottom: 28px;
+  font-size: 1.3rem;
+}
+
+.bank-transfer-page .bank-details-card .card-title .title-icon {
+  color: rgba(107, 114, 128, 1);
+  font-size: 28px;
+}
+
+.bank-transfer-page .bank-details-card .details-list {
+  margin-top: 20px;
+}
+
+.bank-transfer-page .bank-details-card .detail-item {
+  padding: 8px 0;
+}
+
+.bank-transfer-page .bank-details-card .detail-label {
+  color: #718096;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.bank-transfer-page .bank-details-card .detail-value-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #f7fafc;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.bank-transfer-page .bank-details-card .detail-value-wrapper:hover {
+  background: #edf2f7;
+  border-color: #cbd5e0;
+}
+
+.bank-transfer-page .bank-details-card .detail-value {
+  color: #2d3748;
+  font-weight: 600;
+  flex: 1;
+  font-size: 1rem;
+}
+
+.bank-transfer-page .bank-details-card .detail-value.account-number {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: black;
+  font-weight: 700;
+}
+
+.bank-transfer-page .bank-details-card .copy-button {
+  background: rgba(107, 114, 128, 1);
+  color: white;
+  padding: 8px;
+  transition: all 0.2s ease;
+}
+
+.bank-transfer-page .bank-details-card .copy-button:hover {
+  background: #5a67d8;
+  transform: scale(1.1);
+}
+
+.bank-transfer-page .bank-details-card .copy-button svg {
+  font-size: 18px;
+}
+
+.bank-transfer-page .bank-details-card .detail-divider {
+  border-color: #e2e8f0;
+  margin: 8px 0;
+}
+
+.bank-transfer-page .summary-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bank-transfer-page .amount-card {
+  background: linear-gradient(135deg, #4b4c51 0%, #605b65 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  color: white;
+}
+
+.bank-transfer-page .amount-card .MuiCardContent-root {
+  padding: 28px;
+}
+
+.bank-transfer-page .amount-card .card-title {
+  color: white;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  opacity: 0.95;
+}
+
+.bank-transfer-page .amount-card .amount-details {
+  margin-top: 16px;
+}
+
+.bank-transfer-page .amount-card .amount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.bank-transfer-page .amount-card .amount-label {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.bank-transfer-page .amount-card .amount-value {
+  color: white;
+  font-weight: 600;
+  text-align: right;
+}
+
+.bank-transfer-page .amount-card .amount-value.booking-id {
+  font-family: 'Courier New', monospace;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.bank-transfer-page .amount-card .amount-divider {
+  border-color: rgba(255, 255, 255, 0.3);
+  margin: 12px 0;
+}
+
+.bank-transfer-page .amount-card .total-row {
+  padding: 16px 0 8px 0;
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+  margin-top: 8px;
+}
+
+.bank-transfer-page .amount-card .total-label {
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.bank-transfer-page .amount-card .total-amount {
+  color: #ffd700;
+  font-weight: 900;
+  font-size: 2.2rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.5px;
+}
+
+.bank-transfer-page .instructions-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.bank-transfer-page .instructions-card .MuiCardContent-root {
+  padding: 28px;
+}
+
+.bank-transfer-page .instructions-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #2d3748;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.bank-transfer-page .instructions-card .card-title .title-icon {
+  color: #48bb78;
+  font-size: 26px;
+}
+
+.bank-transfer-page .instructions-card .instructions-list {
+  margin-top: 16px;
+}
+
+.bank-transfer-page .instructions-card .instruction-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 12px 0;
+}
+
+.bank-transfer-page .instructions-card .instruction-number {
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(107, 114, 128, 1);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.bank-transfer-page .instructions-card .instruction-text {
+  color: #4a5568;
+  line-height: 1.6;
+  flex: 1;
+  padding-top: 4px;
+  font-size: 0.95rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bank-transfer-page .bank-details-card,
+.bank-transfer-page .amount-card,
+.bank-transfer-page .instructions-card,
+.bank-transfer-page .support-card,
+.bank-transfer-page .notice-card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.bank-transfer-page .amount-card {
+  animation-delay: 0.1s;
+}
+
+.bank-transfer-page .instructions-card {
+  animation-delay: 0.2s;
+}
+
+.bank-transfer-page .support-card {
+  animation-delay: 0.3s;
+}
