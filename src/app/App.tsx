@@ -6,6 +6,7 @@ import HomePage from './screens/homePage';
 import VehiclesPage from './screens/vehiclesPage';
 import UserPage from './screens/userPage';
 import HelpPage from './screens/helpPage';
+import MyBookingsPage from './screens/myBookingsPage';
 import "../css/app.css";
 
 function App() {
@@ -16,9 +17,9 @@ function App() {
           <Route path="/vehicles">
             <VehiclesPage />
           </Route>
-          {/* <Route path="/myBookings">
-            <BookingsPage />
-          </Route> */}
+          <Route path="/myBookings">
+            <MyBookingsPage />
+          </Route>
           <Route path="/help">
             <HelpPage />
           </Route>

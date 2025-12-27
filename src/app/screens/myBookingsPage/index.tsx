@@ -4,321 +4,243 @@ import {
   Box,
   Typography,
   Stack,
-  TextField,
   Button,
   Card,
   CardContent,
-  Divider,
-  MenuItem,
   Chip,
+  IconButton,
+  Avatar,
 } from '@mui/material';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PaymentIcon from '@mui/icons-material/Payment';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PendingIcon from '@mui/icons-material/Pending';
+import CancelIcon from '@mui/icons-material/Cancel';
 import "../../../css/booking.css";
 
-export default function BookingPage() {
-  const carData = {
-    id: 1,
-    name: 'BMW 3 Series',
-    category: 'Luxury Sedan',
-    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400',
-    pricePerDay: 85,
-  };
+interface Booking {
+  id: string;
+  carName: string;
+  carImage: string;
+  carType: string;
+  bookingDate: string;
+  pickupDate: string;
+  returnDate: string;
+  pickupLocation: string;
+  returnLocation: string;
+  totalAmount: number;
+  status: 'confirmed' | 'pending' | 'cancelled';
+  paymentMethod: string;
+  rentalDays: number;
+}
 
-  const bookingData = {
-    pickupDate: '2024-02-15',
-    pickupTime: '10:00',
-    returnDate: '2024-02-18',
-    returnTime: '10:00',
-    totalDays: 3,
-  };
-
-  const paymentMethods = [
-    { value: 'card', label: 'Credit/Debit Card' },
-    { value: 'cash', label: 'Cash on Pickup' },
-    { value: 'bank', label: 'Bank Transfer' },
+export default function MyBookingsPage() {
+  const bookings: Booking[] = [
+    {
+      id: 'BK-2024-001234',
+      carName: 'BMW 3 Series',
+      carImage: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400',
+      carType: 'Sedan',
+      bookingDate: '2024-12-20',
+      pickupDate: '2024-12-27',
+      returnDate: '2024-12-30',
+      pickupLocation: 'Tashkent Airport',
+      returnLocation: 'Tashkent Airport',
+      totalAmount: 368.50,
+      status: 'confirmed',
+      paymentMethod: 'Bank Transfer',
+      rentalDays: 3,
+    },
+    {
+      id: 'BK-2024-001235',
+      carName: 'Mercedes-Benz E-Class',
+      carImage: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400',
+      carType: 'Luxury Sedan',
+      bookingDate: '2024-12-15',
+      pickupDate: '2024-12-22',
+      returnDate: '2024-12-25',
+      pickupLocation: 'City Center',
+      returnLocation: 'City Center',
+      totalAmount: 525.00,
+      status: 'pending',
+      paymentMethod: 'Credit Card',
+      rentalDays: 3,
+    },
+    {
+      id: 'BK-2024-001236',
+      carName: 'Toyota Camry',
+      carImage: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=400',
+      carType: 'Sedan',
+      bookingDate: '2024-12-10',
+      pickupDate: '2024-12-15',
+      returnDate: '2024-12-18',
+      pickupLocation: 'Tashkent Airport',
+      returnLocation: 'Downtown Office',
+      totalAmount: 285.00,
+      status: 'confirmed',
+      paymentMethod: 'Cash',
+      rentalDays: 3,
+    },
+    {
+      id: 'BK-2024-001237',
+      carName: 'Audi A6',
+      carImage: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400',
+      carType: 'Executive Sedan',
+      bookingDate: '2024-12-05',
+      pickupDate: '2024-12-12',
+      returnDate: '2024-12-14',
+      pickupLocation: 'Samarkand Hotel',
+      returnLocation: 'Samarkand Hotel',
+      totalAmount: 420.00,
+      status: 'cancelled',
+      paymentMethod: 'Bank Transfer',
+      rentalDays: 2,
+    },
   ];
 
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'confirmed':
+        return <CheckCircleIcon className="status-icon confirmed" />;
+      case 'pending':
+        return <PendingIcon className="status-icon pending" />;
+      case 'cancelled':
+        return <CancelIcon className="status-icon cancelled" />;
+      default:
+        return null;
+    }
+  };
+
+  const getStatusChip = (status: string) => {
+    const statusIcon = getStatusIcon(status);
+    return (
+      <Chip
+        label={status.charAt(0).toUpperCase() + status.slice(1)}
+        className={`status-chip ${status}`}
+        size="small"
+        {...(statusIcon && { icon: statusIcon })}
+      />
+    );
+  };
+
   return (
-    <Container maxWidth="lg" className="booking-page">
+    <Container maxWidth="lg" className="my-bookings-page">
       <Stack spacing={4}>
-        <Box className="page-header">
-          <Typography variant="h3" className="page-title">
-            Complete Your Booking
-          </Typography>
-          <Typography variant="body1" className="page-subtitle">
-            Just a few more details and you're all set!
-          </Typography>
-        </Box>
-        <Box className="booking-content">
-          <Box className="booking-form">
-            <Stack spacing={4}>
-              <Card className="form-section">
-                <CardContent>
-                  <Typography variant="h6" className="section-title">
-                    <CalendarMonthIcon className="section-icon" />
-                    Rental Dates & Time
-                  </Typography>
+        <Box className="page-header-section">
+          <Button
+            variant="contained"
+            startIcon={<ArrowBackIcon />}
+            className="back-button"
+          >
+            Back to Home
+          </Button>
 
-                  <Stack spacing={3} className="form-fields">
-                    <Box className="date-time-group">
-                      <Typography variant="subtitle2" className="field-label">
-                        Pickup
-                      </Typography>
-                      <Stack direction="row" spacing={2}>
-                        <TextField
-                          type="date"
-                          defaultValue={bookingData.pickupDate}
-                          fullWidth
-                          className="date-input"
-                          InputProps={{
-                            startAdornment: <CalendarMonthIcon className="input-icon" />,
-                          }}
-                        />
-                        <TextField
-                          type="time"
-                          defaultValue={bookingData.pickupTime}
-                          fullWidth
-                          className="time-input"
-                          InputProps={{
-                            startAdornment: <AccessTimeIcon className="input-icon" />,
-                          }}
-                        />
-                      </Stack>
-                    </Box>
-
-                    <Box className="date-time-group">
-                      <Typography variant="subtitle2" className="field-label">
-                        Return
-                      </Typography>
-                      <Stack direction="row" spacing={2}>
-                        <TextField
-                          type="date"
-                          defaultValue={bookingData.returnDate}
-                          fullWidth
-                          className="date-input"
-                          InputProps={{
-                            startAdornment: <CalendarMonthIcon className="input-icon" />,
-                          }}
-                        />
-                        <TextField
-                          type="time"
-                          defaultValue={bookingData.returnTime}
-                          fullWidth
-                          className="time-input"
-                          InputProps={{
-                            startAdornment: <AccessTimeIcon className="input-icon" />,
-                          }}
-                        />
-                      </Stack>
-                    </Box>
-
-                    <Box className="duration-display">
-                      <Chip
-                        label={`Total Duration: ${bookingData.totalDays} Days`}
-                        color="primary"
-                        className="duration-chip"
-                      />
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Card>
-
-              <Card className="form-section">
-                <CardContent>
-                  <Typography variant="h6" className="section-title">
-                    <PersonIcon className="section-icon" />
-                    Personal Information
-                  </Typography>
-
-                  <Stack spacing={2.5} className="form-fields">
-                    <TextField
-                      label="Full Name"
-                      placeholder="Enter your full name"
-                      fullWidth
-                      required
-                      className="text-input"
-                    />
-
-                    <TextField
-                      label="Email Address"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      fullWidth
-                      className="text-input"
-                      InputProps={{
-                        startAdornment: <EmailIcon className="input-icon" />,
-                      }}
-                    />
-
-                    <TextField
-                      label="Phone Number"
-                      type="tel"
-                      placeholder="+998 (90) 123-45-67"
-                      fullWidth
-                      required
-                      className="text-input"
-                      InputProps={{
-                        startAdornment: <PhoneIcon className="input-icon" />,
-                      }}
-                    />
-
-                    <TextField
-                      label="Driver's License Number"
-                      placeholder="Enter your license number"
-                      fullWidth
-                      required
-                      className="text-input"
-                    />
-                  </Stack>
-                </CardContent>
-              </Card>
-
-              <Card className="form-section">
-                <CardContent>
-                  <Typography variant="h6" className="section-title">
-                    <PaymentIcon className="section-icon" />
-                    Payment Method
-                  </Typography>
-
-                  <Stack spacing={2.5} className="form-fields">
-                    <TextField
-                      select
-                      label="Select Payment Method"
-                      defaultValue="card"
-                      fullWidth
-                      className="select-input"
-                    >
-                      {paymentMethods.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-
-                    <Box className="payment-note">
-                      <Typography variant="caption" className="note-text">
-                        💳 Secure payment processing. Your information is encrypted and safe.
-                      </Typography>
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Stack>
+          <Box className="page-title-wrapper">
+            <img src='/icons/merit-logo.png'/>
+            <Box>
+              <Typography variant="h3" className="page-title">
+                My Bookings
+              </Typography>
+              <Typography variant="body1" className="page-subtitle">
+                View and manage your car rental reservations
+              </Typography>
+            </Box>
           </Box>
+        </Box>
 
-          <Box className="booking-summary">
-            <Card className="summary-card">
+        <Box className="bookings-list">
+          {bookings.length === 0 ? (
+            <Card className="empty-state-card">
               <CardContent>
-                <Typography variant="h6" className="summary-title">
-                  Booking Summary
+                <DirectionsCarIcon className="empty-icon" />
+                <Typography variant="h5" className="empty-title">
+                  No Bookings Yet
                 </Typography>
-
-                <Box className="car-info">
-                  <img
-                    src={carData.image}
-                    alt={carData.name}
-                    className="car-image"
-                  />
-                  <Box>
-                    <Typography variant="h6" className="car-name">
-                      {carData.name}
-                    </Typography>
-                    <Typography variant="body2" className="car-category">
-                      {carData.category}
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Divider className="summary-divider" />
-
-                <Box className="rental-details">
-                  <Box className="detail-row">
-                    <Typography variant="body2" className="detail-label">
-                      📅 Pickup
-                    </Typography>
-                    <Typography variant="body2" className="detail-value">
-                      Feb 15, 2024 - 10:00 AM
-                    </Typography>
-                  </Box>
-
-                  <Box className="detail-row">
-                    <Typography variant="body2" className="detail-label">
-                      📅 Return
-                    </Typography>
-                    <Typography variant="body2" className="detail-value">
-                      Feb 18, 2024 - 10:00 AM
-                    </Typography>
-                  </Box>
-
-                  <Box className="detail-row">
-                    <Typography variant="body2" className="detail-label">
-                      📊 Duration
-                    </Typography>
-                    <Typography variant="body2" className="detail-value">
-                      {bookingData.totalDays} Days
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Divider className="summary-divider" />
-
-                <Box className="price-breakdown">
-                  <Typography variant="subtitle2" className="breakdown-title">
-                    Price Breakdown
-                  </Typography>
-
-                  <Box className="price-row">
-                    <Typography variant="body2">
-                      Rental ({bookingData.totalDays} days × ${carData.pricePerDay})
-                    </Typography>
-                    <Typography variant="body2" className="price-value">
-                      ${bookingData.totalDays * carData.pricePerDay}
-                    </Typography>
-                  </Box>
-
-                  <Box className="price-row">
-                    <Typography variant="body2">
-                      Tax (10%)
-                    </Typography>
-                    <Typography variant="body2" className="price-value">
-                      ${(bookingData.totalDays * carData.pricePerDay * 0.1).toFixed(2)}
-                    </Typography>
-                  </Box>
-
-                  <Divider className="total-divider" />
-
-                  <Box className="price-row total-row">
-                    <Typography variant="h6" className="total-label">
-                      Total
-                    </Typography>
-                    <Typography variant="h5" className="total-price">
-                      ${(bookingData.totalDays * carData.pricePerDay * 1.1).toFixed(2)}
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Button
-                  variant="contained"
-                  size="large"
-                  fullWidth
-                  className="confirm-button"
-                  startIcon={<CheckCircleIcon />}
-                >
-                  Confirm Booking
+                <Typography variant="body1" className="empty-text">
+                  You haven't made any car rental reservations yet.
+                </Typography>
+                <Button variant="contained" className="browse-button">
+                  Browse Cars
                 </Button>
-
-                <Typography variant="caption" className="terms-note">
-                  By confirming, you agree to our Terms & Conditions
-                </Typography>
               </CardContent>
             </Card>
-          </Box>
+          ) : (
+            <Box className="bookings-container">
+              {bookings.map((booking) => (
+                <Box key={booking.id} className="booking-wrapper">
+                  <Card className={`booking-card ${booking.status}`}>
+                    <CardContent className="booking-card-content">
+                      <Box className="car-image-section">
+                        <Avatar
+                          src={booking.carImage}
+                          alt={booking.carName}
+                          className="car-image"
+                          variant="rounded"
+                        />
+                        <Box className="car-type-badge">
+                          <Typography variant="caption">{booking.carType}</Typography>
+                        </Box>
+                      </Box>
+
+                      <Box className="booking-details-section">
+                        <Box className="booking-header">
+                          <Box>
+                            <Typography variant="h5" className="car-name">
+                              {booking.carName}
+                            </Typography>
+                            <Typography variant="body2" className="booking-id">
+                              Booking ID: {booking.id}
+                            </Typography>
+                          </Box>
+                          {getStatusChip(booking.status)}
+                        </Box>
+
+                        <Box className="details-grid">
+                          <Box className="detail-row">
+                            <Box className="detail-item">
+                              <AccessTimeIcon className="detail-icon" />
+                              <Box>
+                                <Typography variant="caption" className="detail-label">
+                                  Rental Duration
+                                </Typography>
+                                <Typography variant="body2" className="detail-value">
+                                  {booking.rentalDays} Days
+                                </Typography>
+                              </Box>
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Box>
+
+                      <Box className="booking-actions-section">
+                        <Box className="price-section">
+                          <Typography variant="caption" className="price-label">
+                            Total Amount
+                          </Typography>
+                          <Typography variant="h4" className="price-value">
+                            ${booking.totalAmount}
+                          </Typography>
+                        </Box>
+
+                        <Box className="action-buttons">
+                          <IconButton
+                            className="delete-button"
+                          >
+                            <DeleteOutlineIcon />
+                          </IconButton>
+                        </Box>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ))}
+            </Box>
+          )}
         </Box>
       </Stack>
     </Container>

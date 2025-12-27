@@ -32,7 +32,7 @@ export function HomeNavbar () {
               Vehicles
             </NavLink>
             {authMember ? (
-              <NavLink to="/booking" className="nav-link">
+              <NavLink to="/myBookings" className="nav-link">
                 My Bookings
               </NavLink>
             ) : null}
