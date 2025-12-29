@@ -29,7 +29,7 @@ export default function PopularVehicles() {
             </Typography>
           </Box>
         </Stack>
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={3} >
           {popularVehicles.length !== 0 ? (
             popularVehicles.map((ele: Vehicle) => {
               const imagePath = `${serverApi}/${ele.vehicleImages[0]}`;

@@ -1,8 +1,10 @@
+import { User } from "./user";
 import { Vehicle } from "./vehicle"
 
 /** REACT APP STATE */
 export interface AppRootState {
     homePage: HomePageState;
+    vehiclesPage: VehiclesPageState;
 }
 
 /** HOMEPAGE */
@@ -12,5 +14,11 @@ export interface HomePageState {
 }
 
 /** VEHICLES PAGE */
+
+export interface VehiclesPageState {
+    company: User | null;
+    chosenVehicle: Vehicle | null;
+    vehicles: Vehicle[];
+}
 
 /** BOOKINGS PAGE */
