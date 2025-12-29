@@ -20,5 +20,6 @@ export interface VehicleInquiry {
     page: number;
     limit: number;
     vehicleCollection?: VehicleCollection;
+    vehicleFuel?: VehicleFuel;
     search?: string;
 }

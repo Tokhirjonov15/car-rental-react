@@ -14,15 +14,17 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { Vehicle } from "../../../lib/types/vehicle";
+import { Vehicle, VehicleInquiry } from "../../../lib/types/vehicle";
 import { setVehicles } from "./slice";
 import { retrieveVehicles } from "./selector";
 import VehicleService from "../../services/VehicleService";
 import { serverApi } from "../../../lib/config";
 
 import "../../../css/vehicles.css";
+import { useHistory } from "react-router-dom";
+import { VehicleCollection, VehicleFuel } from "../../../lib/enums/vehicle.enum";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -37,20 +39,75 @@ const vehiclesRetriever = createSelector(
 export default function Vehicles() {
   const { setVehicles } = actionDispatch(useDispatch());
   const vehicles = useSelector(vehiclesRetriever);
+  const [vehicleSearch, setVehicleSearch] = useState<VehicleInquiry>({
+      page: 1,
+      limit: 20,
+      book: "createdAt",
+      search: "",
+  }); 
+  const [searchText, setSearchText] = useState<string>("");
+  const history = useHistory();
 
   useEffect(() => {
-    const vehicleService = new VehicleService();
-
-    vehicleService
-      .getVehicles({
-        page: 1,
-        limit: 8,
-        book: "createdAt",
-        search: "",
-      })
+    const vehicle = new VehicleService();
+    vehicle
+      .getVehicles(vehicleSearch)
       .then((data) => setVehicles(data))
       .catch((err) => console.log(err));
-  }, [setVehicles]);
+  }, [vehicleSearch]);
+
+  useEffect(() => {
+    if (searchText === "") {
+      vehicleSearch.search = "";
+      setVehicleSearch({ ...vehicleSearch });
+    }
+  }, [searchText]);
+
+/** HANDLERS */
+const searchCollectionHandler = (collection: VehicleCollection) => {
+  setVehicleSearch({
+    ...vehicleSearch,
+    page: 1,
+    vehicleCollection: collection,
+  });
+};
+
+const searchOrderHandler = (book: string) => {
+  setVehicleSearch({
+    ...vehicleSearch,
+    page: 1,
+    book: book,
+  });
+};
+
+const searchVehicleHandler = () => {
+  setVehicleSearch({
+    ...vehicleSearch,
+    search: searchText,
+  });
+};
+
+const clearFiltersHandler = () => {
+  setVehicleSearch({
+    page: 1,
+    limit: 20,
+    book: "createdAt",
+    search: searchText,
+    vehicleCollection: undefined,
+  });
+};
+
+const clearSearch = () => {
+  setSearchText("");
+  setVehicleSearch({
+    ...vehicleSearch,
+    search: "",
+  });
+};
+
+const chooseCarHandler = (id: string) => {
+  history.push(`/vehicles/${id}`);
+};
 
   return (
     <Container maxWidth="xl" className="cars-page">
@@ -64,8 +121,25 @@ export default function Vehicles() {
             type="text"
             placeholder="Search something here"
             className="cars-search-input"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") searchVehicleHandler();
+            }}
           />
-          <Button className="search-btn">SEARCH</Button>
+          {searchText && (
+            <button
+              type="button"
+              className="clear-search-btn"
+              onClick={() => setSearchText("")}
+            >
+              ×
+            </button>
+          )}
+          <Button 
+            className="search-btn"
+            onClick={searchVehicleHandler}
+          >SEARCH</Button>
         </Box>
       </Box>
 
@@ -79,22 +153,58 @@ export default function Vehicles() {
             <Stack>
               <Stack className="sidebar-label">TYPE</Stack>
               <Stack spacing={1} className="sidebar-list">
-                <Button>SPORT</Button>
-                <Button>SUV</Button>
-                <Button>MINIVAN</Button>
-                <Button>SEDAN</Button>
-                <Button>HATCHBACK</Button>
-                <Button>OTHERS</Button>
-              </Stack>
-            </Stack>
-
-            <Stack>
-              <Stack className="sidebar-label">CAPACITY</Stack>
-              <Stack spacing={1} className="sidebar-list">
-                <Button>2 Seats</Button>
-                <Button>4 Seats</Button>
-                <Button>5 Seats</Button>
-                <Button>6 Seats or More</Button>
+                <Button onClick={clearFiltersHandler}>
+                  ALL VEHICLES
+                </Button>
+                <Button
+                  onClick={() => 
+                    searchCollectionHandler(VehicleCollection.SPORTCAR)
+                  }
+                >
+                  SPORT
+                </Button>
+                <Button
+                  onClick={() => 
+                    searchCollectionHandler(VehicleCollection.SUV)
+                  }
+                >
+                  SUV
+                </Button>
+                <Button
+                  onClick={() => 
+                    searchCollectionHandler(VehicleCollection.MINIVAN)
+                  }
+                >
+                  MINIVAN
+                </Button>
+                <Button
+                  onClick={() => 
+                    searchCollectionHandler(VehicleCollection.SEDAN)
+                  }
+                >
+                  SEDAN
+                </Button>
+                <Button
+                  onClick={() => 
+                    searchCollectionHandler(VehicleCollection.HATCHBACK)
+                  }
+                >
+                  HATCHBACK
+                </Button>
+                <Button
+                  onClick={() => 
+                    searchCollectionHandler(VehicleCollection.LUXURY)
+                  }
+                >
+                  LUXURY
+                </Button>
+                <Button
+                  onClick={() => 
+                    searchCollectionHandler(VehicleCollection.OTHER)
+                  }
+                >
+                  OTHERS
+                </Button>
               </Stack>
             </Stack>
           </Stack>
@@ -174,8 +284,10 @@ export default function Vehicles() {
                         </Typography>
 
                         <Button
+                          key={vehicle._id}
                           className="rent-btn"
                           variant="contained"
+                          onClick={() => chooseCarHandler(vehicle._id)}
                         >
                           Rent Now
                         </Button>
@@ -191,7 +303,6 @@ export default function Vehicles() {
             direction="row"
             spacing={2}
           >
-            <Button>Show more car...</Button>
           </Stack>
         </Box>
       </Stack>
