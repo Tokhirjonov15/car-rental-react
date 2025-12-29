@@ -16,7 +16,7 @@ export interface Vehicle {
 }
 
 export interface VehicleInquiry {
-    book: string;
+    book?: string;
     page: number;
     limit: number;
     vehicleCollection?: VehicleCollection;

@@ -1,44 +1,22 @@
 import { Box, Stack, Container, Typography, Card, CardMedia, CardContent, Button, Pagination } from "@mui/material";
-import { useState } from "react";
+
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrievePopularVehicles } from "./selector";
+import { Vehicle } from "../../../lib/types/vehicle";
+import { serverApi } from "../../../lib/config";
 import "../../../css/home.css";
 
-const vehicles = [
-  {
-    id: 1,
-    name: "Tesla Model 3",
-    subtitle: "Standard Range Plus",
-    price: 140,
-    image: "/img/tesla2.png",
-    specs: ["ELECTRIC", "4 Doors", "5 Seats"],
-  },
-  {
-    id: 2,
-    name: "Mercedes-Benz C",
-    subtitle: "C-Class Sedan",
-    price: 185,
-    image: "/img/benz2.png",
-    specs: ["DIESEL", "2 Doors", "4 Seats"],
-  },
-  {
-    id: 3,
-    name: "Porsche 911",
-    subtitle: "Carrera S",
-    price: 350,
-    image: "/img/911.jpg",
-    specs: ["GASOLINE", "2 Doors", "2 Seats"],
-  },
-  {
-    id: 4,
-    name: "Range Rover Evoque",
-    subtitle: "Autobiography",
-    price: 220,
-    image: "/img/evoque.jpg",
-    specs: ["HYBRID", "4 Doors", "7 Seats"],
-  },
-];
+/** REDUX SLICE & SELECTOR */
+const popularVehiclesRetriever = createSelector(
+  retrievePopularVehicles,
+  (popularVehicles) => ({ popularVehicles })
+);
 
 export default function PopularVehicles() {
-  const [page, setPage] = useState(1);
+  const { popularVehicles } = useSelector(popularVehiclesRetriever);
+
+  console.log("popularVehicles:", popularVehicles);
 
   return (
     <div className="top-rated-section">
@@ -52,44 +30,51 @@ export default function PopularVehicles() {
           </Box>
         </Stack>
         <Stack direction="row" spacing={3}>
-          {vehicles.map((car) => (
-            <Card key={car.id} className="vehicle-card">
-              <Box className="image-wrapper">
-                <CardMedia
-                  component="img"
-                  image={car.image}
-                  alt={car.name}
-                  className="vehicle-image"
-                />
-                <span className="favorite">♡</span>
-              </Box>
-              <CardContent>
-                <Typography className="vehicle-name">{car.name}</Typography>
-                <Typography className="vehicle-subtitle">{car.subtitle}</Typography>
+          {popularVehicles.length !== 0 ? (
+            popularVehicles.map((ele: Vehicle) => {
+              const imagePath = `${serverApi}/${ele.vehicleImages[0]}`;
+              console.log("IMAGE PATH:", imagePath);
 
-                <Stack direction="row" spacing={2} className="specs">
-                  {car.specs.map((spec, i) => (
-                    <span key={i}>{spec}</span>
-                  ))}
-                </Stack>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" mt={2}>
-                  <Typography className="price">
-                    ${car.price} <span>/day</span>
-                  </Typography>
-                  <Button className="rent-btn">Rent Now</Button>
-                </Stack>
-              </CardContent>
-            </Card>
-          ))}
-        </Stack>
-        <Stack alignItems="center" mt={8}>
-          <Pagination
-            count={3}
-            page={page}
-            onChange={(_, value) => setPage(value)}
-            color="primary"
-            shape="rounded"
-          />
+              return (
+              <Card key={ele._id} className="vehicle-card">
+                <Box className="image-wrapper">
+                  <CardMedia
+                    component="img"
+                    image={imagePath}
+                    alt={ele.vehicleName}
+                    className="vehicle-image"
+                  />
+                  <span className="favorite">♡</span>
+                </Box>
+
+                <CardContent>
+                  <Typography className="vehicle-name">{ele.vehicleName}</Typography>
+
+                  <Stack direction="row" spacing={2} className="specs">
+                    <span>{ele.vehicleFuel}</span>
+                    <span>{ele.vehicleDoor} Doors</span>
+                    <span>{ele.vehicleSeat} Seats</span>
+                  </Stack>
+
+                  <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    mt={2}
+                  >
+                    <Typography className="price">
+                      ${ele.vehiclePrice} <span>/day</span>
+                    </Typography>
+                    <Button className="rent-btn">Rent Now</Button>
+                  </Stack>
+                </CardContent>
+              </Card>
+            );
+            })
+          ) : (
+            <Box className="no-data">Popular Vehicles are Not Available!</Box>
+          )}
+          
         </Stack>
       </Container>
     </div>
