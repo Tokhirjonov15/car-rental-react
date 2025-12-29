@@ -26,5 +26,5 @@ const vehiclesPageSlice = createSlice({
 export const { setCompany, setChosenVehicle, setVehicles} = 
   vehiclesPageSlice.actions;
 
-const VehiclesPageReducer = vehiclesPageSlice.reducer;
-export default VehiclesPageReducer;
+const vehiclesPageReducer = vehiclesPageSlice.reducer;
+export default vehiclesPageReducer;

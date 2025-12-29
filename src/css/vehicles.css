@@ -98,6 +98,16 @@
   gap: 24px;
 }
 
+.cars-page .no-vehicles {
+  width: 100%;
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #777;
+}
+
+
 .cars-page .car-card {
   width: calc(33.333% - 16px);
   border-radius: 16px !important;
