@@ -26,6 +26,18 @@ class VehicleService {
             throw err;
         }
     }
+
+    public async getVehicle(vehicleId: string): Promise<Vehicle> {
+        try {
+            const url = `${this.path}/vehicle/${vehicleId}`;
+            const result = await axios.get(url, { withCredentials: true });
+            console.log("getVehicle:", result);
+            return result.data;
+        } catch (err) {
+            console.log("ERROR, getVehicle:", err);
+            throw err;
+        }
+    }
 }
 
 export default VehicleService;

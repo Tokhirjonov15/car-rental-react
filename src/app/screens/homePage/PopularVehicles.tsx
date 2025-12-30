@@ -5,8 +5,8 @@ import { createSelector } from "reselect";
 import { retrievePopularVehicles } from "./selector";
 import { Vehicle } from "../../../lib/types/vehicle";
 import { serverApi } from "../../../lib/config";
-import "../../../css/home.css";
 import { useHistory } from "react-router-dom";
+import "../../../css/home.css";
 
 /** REDUX SLICE & SELECTOR */
 const popularVehiclesRetriever = createSelector(
