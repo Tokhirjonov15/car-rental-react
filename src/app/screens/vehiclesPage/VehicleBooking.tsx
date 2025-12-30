@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Box,
@@ -11,31 +11,146 @@ import {
   Divider,
   MenuItem,
   Chip,
+  Alert,
+  Snackbar,
 } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useHistory, useParams } from 'react-router-dom';
+import { Dispatch } from '@reduxjs/toolkit';
+import { createSelector } from "reselect";
+import { useSelector, useDispatch } from "react-redux";
+import VehicleService from '../../services/VehicleService';
+import { setChosenVehicle } from './slice';
+import { Vehicle } from '../../../lib/types/vehicle';
+import { retrieveChosenVehicle } from './selector';
+import { serverApi } from '../../../lib/config';
 import "../../../css/vehicles.css";
 
+/** REDUX SLICE & SELECTOR */
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenVehicle: (data: Vehicle) => dispatch(setChosenVehicle(data)),
+});
+const chosenVehicleRetriever = createSelector(
+  retrieveChosenVehicle,
+  (chosenVehicle) => ({
+    chosenVehicle,
+  })
+);
+
 export default function BookingPage() {
-  const carData = {
-    id: 1,
-    name: 'BMW 3 Series',
-    category: 'Luxury Sedan',
-    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400',
-    pricePerDay: 85,
+  const { vehicleId } = useParams<{ vehicleId: string }>();
+  const { setChosenVehicle } = actionDispatch(useDispatch());
+  const { chosenVehicle } = useSelector(chosenVehicleRetriever);
+  const history = useHistory();
+
+  // Booking state
+  const [bookingData, setBookingData] = useState({
+    pickupDate: '',
+    pickupTime: '10:00',
+    returnDate: '',
+    returnTime: '10:00',
+    totalDays: 0,
+  });
+
+  const [paymentMethod, setPaymentMethod] = useState('card');
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  useEffect(() => {
+    const vehicle = new VehicleService();
+    vehicle
+      .getVehicle(vehicleId)
+      .then((data) => setChosenVehicle(data))
+      .catch((err) => console.log(err));
+  }, [vehicleId]);
+
+  const calculateDays = (pickup: string, returnDate: string) => {
+    if (!pickup || !returnDate) return 0;
+    
+    const pickupDateTime = new Date(pickup);
+    const returnDateTime = new Date(returnDate);
+    
+    if (returnDateTime <= pickupDateTime) return 0;
+    
+    const diffTime = Math.abs(returnDateTime.getTime() - pickupDateTime.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return diffDays;
   };
 
-  const bookingData = {
-    pickupDate: '2024-02-15',
-    pickupTime: '10:00',
-    returnDate: '2024-02-18',
-    returnTime: '10:00',
-    totalDays: 3,
+  const handlePickupDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPickupDate = e.target.value;
+    const days = calculateDays(newPickupDate, bookingData.returnDate);
+    
+    setBookingData({
+      ...bookingData,
+      pickupDate: newPickupDate,
+      totalDays: days,
+    });
+  };
+
+  const handleReturnDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newReturnDate = e.target.value;
+    const days = calculateDays(bookingData.pickupDate, newReturnDate);
+    
+    setBookingData({
+      ...bookingData,
+      returnDate: newReturnDate,
+      totalDays: days,
+    });
+  };
+
+  const formatDateTime = (date: string, time: string) => {
+    if (!date) return 'Not selected';
+    
+    const dateObj = new Date(date);
+    const options: Intl.DateTimeFormatOptions = { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric' 
+    };
+    const formattedDate = dateObj.toLocaleDateString('en-US', options);
+    
+    // 24 soatlik formatni 12 soatlikga o'zgartirish
+    const [hours, minutes] = time.split(':');
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12;
+    
+    return `${formattedDate} - ${displayHour}:${minutes} ${ampm}`;
+  };
+
+  const calculateTax = () => {
+    if (!chosenVehicle) return 0;
+    const subtotal = bookingData.totalDays * chosenVehicle.vehiclePrice;
+    return subtotal * 0.1;
+  };
+
+  const calculateTotal = () => {
+    if (!chosenVehicle) return 0;
+    const subtotal = bookingData.totalDays * chosenVehicle.vehiclePrice;
+    const tax = calculateTax();
+    return subtotal + tax;
+  };
+
+  // Confirm Booking Handler
+  const handleConfirmBooking = () => {
+    if (paymentMethod === 'cash') {
+      // Cash on Pickup - Alert ko'rsatish va 3 soniyadan so'ng /vehicles ga yo'naltirish
+      setShowSuccessAlert(true);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        history.push('/vehicles');
+      }, 3000);
+    } else if (paymentMethod === 'card') {
+      window.scrollTo(0, 0);
+      history.push(`/vehicles/${vehicleId}/booking/cardPayment`);
+    } else if (paymentMethod === 'bank') {
+      window.scrollTo(0, 0);
+      history.push(`/vehicles/${vehicleId}/booking/bankTransferPayment`);
+    }
   };
 
   const paymentMethods = [
@@ -46,6 +161,21 @@ export default function BookingPage() {
 
   return (
     <Container maxWidth="lg" className="booking-page">
+      <Snackbar
+        open={showSuccessAlert}
+        autoHideDuration={3000}
+        onClose={() => setShowSuccessAlert(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert 
+          onClose={() => setShowSuccessAlert(false)} 
+          severity="success" 
+          sx={{ width: '100%' }}
+        >
+          Booking Successfully Completed! 🎉
+        </Alert>
+      </Snackbar>
+
       <Stack spacing={4}>
         <Box className="page-header">
           <Typography variant="h3" className="page-title">
@@ -73,16 +203,21 @@ export default function BookingPage() {
                       <Stack direction="row" spacing={2}>
                         <TextField
                           type="date"
-                          defaultValue={bookingData.pickupDate}
+                          value={bookingData.pickupDate}
+                          onChange={handlePickupDateChange}
                           fullWidth
                           className="date-input"
                           InputProps={{
                             startAdornment: <CalendarMonthIcon className="input-icon" />,
                           }}
+                          inputProps={{
+                            min: new Date().toISOString().split('T')[0],
+                          }}
                         />
                         <TextField
                           type="time"
-                          defaultValue={bookingData.pickupTime}
+                          value={bookingData.pickupTime}
+                          onChange={(e) => setBookingData({...bookingData, pickupTime: e.target.value})}
                           fullWidth
                           className="time-input"
                           InputProps={{
@@ -99,16 +234,21 @@ export default function BookingPage() {
                       <Stack direction="row" spacing={2}>
                         <TextField
                           type="date"
-                          defaultValue={bookingData.returnDate}
+                          value={bookingData.returnDate}
+                          onChange={handleReturnDateChange}
                           fullWidth
                           className="date-input"
                           InputProps={{
                             startAdornment: <CalendarMonthIcon className="input-icon" />,
                           }}
+                          inputProps={{
+                            min: bookingData.pickupDate || new Date().toISOString().split('T')[0],
+                          }}
                         />
                         <TextField
                           type="time"
-                          defaultValue={bookingData.returnTime}
+                          value={bookingData.returnTime}
+                          onChange={(e) => setBookingData({...bookingData, returnTime: e.target.value})}
                           fullWidth
                           className="time-input"
                           InputProps={{
@@ -118,63 +258,15 @@ export default function BookingPage() {
                       </Stack>
                     </Box>
 
-                    <Box className="duration-display">
-                      <Chip
-                        label={`Total Duration: ${bookingData.totalDays} Days`}
-                        color="primary"
-                        className="duration-chip"
-                      />
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Card>
-
-              <Card className="form-section">
-                <CardContent>
-                  <Typography variant="h6" className="section-title">
-                    <PersonIcon className="section-icon" />
-                    Personal Information
-                  </Typography>
-
-                  <Stack spacing={2.5} className="form-fields">
-                    <TextField
-                      label="Full Name"
-                      placeholder="Enter your full name"
-                      fullWidth
-                      required
-                      className="text-input"
-                    />
-
-                    <TextField
-                      label="Email Address"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      fullWidth
-                      className="text-input"
-                      InputProps={{
-                        startAdornment: <EmailIcon className="input-icon" />,
-                      }}
-                    />
-
-                    <TextField
-                      label="Phone Number"
-                      type="tel"
-                      placeholder="+998 (90) 123-45-67"
-                      fullWidth
-                      required
-                      className="text-input"
-                      InputProps={{
-                        startAdornment: <PhoneIcon className="input-icon" />,
-                      }}
-                    />
-
-                    <TextField
-                      label="Driver's License Number"
-                      placeholder="Enter your license number"
-                      fullWidth
-                      required
-                      className="text-input"
-                    />
+                    {bookingData.totalDays > 0 && (
+                      <Box className="duration-display">
+                        <Chip
+                          label={`Total Duration: ${bookingData.totalDays} Day${bookingData.totalDays > 1 ? 's' : ''}`}
+                          color="primary"
+                          className="duration-chip"
+                        />
+                      </Box>
+                    )}
                   </Stack>
                 </CardContent>
               </Card>
@@ -190,7 +282,8 @@ export default function BookingPage() {
                     <TextField
                       select
                       label="Select Payment Method"
-                      defaultValue="card"
+                      value={paymentMethod}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
                       fullWidth
                       className="select-input"
                     >
@@ -220,17 +313,19 @@ export default function BookingPage() {
                 </Typography>
 
                 <Box className="car-info">
-                  <img
-                    src={carData.image}
-                    alt={carData.name}
-                    className="car-image"
-                  />
+                  {chosenVehicle?.vehicleImages && chosenVehicle.vehicleImages.length > 0 && (
+                    <img
+                      src={`${serverApi}/${chosenVehicle.vehicleImages[0]}`}
+                      alt={chosenVehicle.vehicleName}
+                      className="car-image"
+                    />
+                  )}
                   <Box>
                     <Typography variant="h6" className="car-name">
-                      {carData.name}
+                      {chosenVehicle?.vehicleName}
                     </Typography>
                     <Typography variant="body2" className="car-category">
-                      {carData.category}
+                      {chosenVehicle?.vehicleCollection}
                     </Typography>
                   </Box>
                 </Box>
@@ -243,7 +338,7 @@ export default function BookingPage() {
                       📅 Pickup
                     </Typography>
                     <Typography variant="body2" className="detail-value">
-                      Feb 15, 2024 - 10:00 AM
+                      {formatDateTime(bookingData.pickupDate, bookingData.pickupTime)}
                     </Typography>
                   </Box>
 
@@ -252,7 +347,7 @@ export default function BookingPage() {
                       📅 Return
                     </Typography>
                     <Typography variant="body2" className="detail-value">
-                      Feb 18, 2024 - 10:00 AM
+                      {formatDateTime(bookingData.returnDate, bookingData.returnTime)}
                     </Typography>
                   </Box>
 
@@ -261,7 +356,10 @@ export default function BookingPage() {
                       📊 Duration
                     </Typography>
                     <Typography variant="body2" className="detail-value">
-                      {bookingData.totalDays} Days
+                      {bookingData.totalDays > 0 
+                        ? `${bookingData.totalDays} Day${bookingData.totalDays > 1 ? 's' : ''}`
+                        : 'Select dates'
+                      }
                     </Typography>
                   </Box>
                 </Box>
@@ -275,10 +373,13 @@ export default function BookingPage() {
 
                   <Box className="price-row">
                     <Typography variant="body2">
-                      Rental ({bookingData.totalDays} days × ${carData.pricePerDay})
+                      Rental ({bookingData.totalDays} days × ${chosenVehicle?.vehiclePrice || 0})
                     </Typography>
                     <Typography variant="body2" className="price-value">
-                      ${bookingData.totalDays * carData.pricePerDay}
+                      ${chosenVehicle && bookingData.totalDays > 0 
+                        ? (bookingData.totalDays * chosenVehicle.vehiclePrice).toFixed(2)
+                        : '0.00'
+                      }
                     </Typography>
                   </Box>
 
@@ -287,7 +388,7 @@ export default function BookingPage() {
                       Tax (10%)
                     </Typography>
                     <Typography variant="body2" className="price-value">
-                      ${(bookingData.totalDays * carData.pricePerDay * 0.1).toFixed(2)}
+                      ${calculateTax().toFixed(2)}
                     </Typography>
                   </Box>
 
@@ -297,8 +398,8 @@ export default function BookingPage() {
                     <Typography variant="h6" className="total-label">
                       Total
                     </Typography>
-                    <Typography variant="h5" className="total-price">
-                      ${(bookingData.totalDays * carData.pricePerDay * 1.1).toFixed(2)}
+                    <Typography variant="h6" className="total-value">
+                      ${calculateTotal().toFixed(2)}
                     </Typography>
                   </Box>
                 </Box>
@@ -309,6 +410,8 @@ export default function BookingPage() {
                   fullWidth
                   className="confirm-button"
                   startIcon={<CheckCircleIcon />}
+                  disabled={bookingData.totalDays === 0}
+                  onClick={handleConfirmBooking}
                 >
                   Confirm Booking
                 </Button>

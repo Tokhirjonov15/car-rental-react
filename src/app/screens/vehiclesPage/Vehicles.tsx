@@ -279,7 +279,7 @@ const chooseCarHandler = (id: string) => {
                         className="car-footer"
                       >
                         <Typography className="car-price">
-                          {vehicle.vehiclePrice}
+                          ${vehicle.vehiclePrice}
                           <span>/day</span>
                         </Typography>
 
