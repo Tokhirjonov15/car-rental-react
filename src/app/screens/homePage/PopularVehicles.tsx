@@ -6,6 +6,7 @@ import { retrievePopularVehicles } from "./selector";
 import { Vehicle } from "../../../lib/types/vehicle";
 import { serverApi } from "../../../lib/config";
 import "../../../css/home.css";
+import { useHistory } from "react-router-dom";
 
 /** REDUX SLICE & SELECTOR */
 const popularVehiclesRetriever = createSelector(
@@ -13,8 +14,16 @@ const popularVehiclesRetriever = createSelector(
   (popularVehicles) => ({ popularVehicles })
 );
 
+
 export default function PopularVehicles() {
   const { popularVehicles } = useSelector(popularVehiclesRetriever);
+  const history = useHistory();
+
+  /** HANDLERS */
+  const chooseCarHandler = (id: string) => {
+    window.scrollTo(0, 0);
+    history.push(`/vehicles/${id}`);
+  };
 
   console.log("popularVehicles:", popularVehicles);
 
@@ -65,7 +74,12 @@ export default function PopularVehicles() {
                     <Typography className="price">
                       ${ele.vehiclePrice} <span>/day</span>
                     </Typography>
-                    <Button className="rent-btn">Rent Now</Button>
+                    <Button 
+                      className="rent-btn"
+                      onClick={() => chooseCarHandler(ele._id)}
+                    >
+                      Rent Now
+                    </Button>
                   </Stack>
                 </CardContent>
               </Card>

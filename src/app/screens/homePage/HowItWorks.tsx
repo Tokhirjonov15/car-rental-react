@@ -13,6 +13,7 @@ import BookOnlineIcon from '@mui/icons-material/BookOnline';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import "../../../css/home.css";
+import { useHistory } from 'react-router-dom';
 
   const steps = [
     {
@@ -36,65 +37,74 @@ import "../../../css/home.css";
   ];
 
   export function HowItWorks () {
-  return (
-    <Container className="how-it-works-section">
-      <Stack spacing={6}>
-        <Stack spacing={2} alignItems="center" className="section-header">
-          <Typography className="section-subtitle">
-            SIMPLE PROCESS
-          </Typography>
-          <Typography variant="h2" component="h2" className="section-title">
-            How It Works
-          </Typography>
-          <Typography variant="body1" className="section-description">
-            Rent a car in just 3 easy steps. Fast, secure, and hassle-free.
-          </Typography>
-        </Stack>
+    const history = useHistory();
+    
+      /** HANDLERS */
+      const chooseCarHandler = () => {
+        window.scrollTo(0, 0);
+        history.push(`/vehicles`);
+      };
 
-        <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          spacing={4}
-          alignItems="stretch"
-          className="steps-container"
-        >
-          {steps.map((step, index) => (
-            <Box key={index} className="step-wrapper">
-              <Card elevation={0} className="step-card">
-                <CardContent className="step-card-content">
-                  <Box className="step-badge">
-                    {step.step}
-                  </Box>
-                  <Box className="step-icon-wrapper">
-                    {step.icon}
-                  </Box>
-                  <Typography variant="h5" component="h3" className="step-title">
-                    {step.title}
-                  </Typography>
-                  <Typography variant="body2" className="step-description">
-                    {step.description}
-                  </Typography>
-                </CardContent>
-              </Card>
+    return (
+      <Container className="how-it-works-section">
+        <Stack spacing={6}>
+          <Stack spacing={2} alignItems="center" className="section-header">
+            <Typography className="section-subtitle">
+              SIMPLE PROCESS
+            </Typography>
+            <Typography variant="h2" component="h2" className="section-title">
+              How It Works
+            </Typography>
+            <Typography variant="body1" className="section-description">
+              Rent a car in just 3 easy steps. Fast, secure, and hassle-free.
+            </Typography>
+          </Stack>
 
-              {index < steps.length - 1 && (
-                <Box className="step-arrow">
-                  <ArrowForwardIcon className="arrow-icon" />
-                </Box>
-              )}
-            </Box>
-          ))}
-        </Stack>
-        <Stack alignItems="center" className="cta-wrapper">
-          <Button
-            variant="contained"
-            size="large"
-            endIcon={<ArrowForwardIcon />}
-            className="cta-button"
+          <Stack
+            direction={{ xs: 'column', md: 'row' }}
+            spacing={4}
+            alignItems="stretch"
+            className="steps-container"
           >
-            Start Your Journey
-          </Button>
+            {steps.map((step, index) => (
+              <Box key={index} className="step-wrapper">
+                <Card elevation={0} className="step-card">
+                  <CardContent className="step-card-content">
+                    <Box className="step-badge">
+                      {step.step}
+                    </Box>
+                    <Box className="step-icon-wrapper">
+                      {step.icon}
+                    </Box>
+                    <Typography variant="h5" component="h3" className="step-title">
+                      {step.title}
+                    </Typography>
+                    <Typography variant="body2" className="step-description">
+                      {step.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+
+                {index < steps.length - 1 && (
+                  <Box className="step-arrow">
+                    <ArrowForwardIcon className="arrow-icon" />
+                  </Box>
+                )}
+              </Box>
+            ))}
+          </Stack>
+          <Stack alignItems="center" className="cta-wrapper">
+            <Button
+              variant="contained"
+              size="large"
+              endIcon={<ArrowForwardIcon />}
+              className="cta-button"
+              onClick={chooseCarHandler}
+            >
+              Start Your Journey
+            </Button>
+          </Stack>
         </Stack>
-      </Stack>
-    </Container>
-  );
-};
+      </Container>
+    );
+  };
