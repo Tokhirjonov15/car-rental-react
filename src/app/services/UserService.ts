@@ -1,6 +1,6 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { LoginInput, User, UserInput } from "../../lib/types/user";
+import { LoginInput, User, UserInput, UserUpdateInput } from "../../lib/types/user";
 
 class UserService {
     private readonly path: string;
@@ -39,6 +39,33 @@ class UserService {
             return user;
         } catch (err) {
             console.log("ERROR, UserLogin", err);
+            throw err;
+        }
+    }
+
+    public async updateUser(input: UserUpdateInput): Promise<User> {
+        try {
+            const formData = new FormData();
+            formData.append("userId", input.userId || "");
+            formData.append("userPhone", input.userPhone || "");
+            formData.append("userAddress", input.userAddress || "");
+            formData.append("userImage", input.userImage || "");
+
+            const result = await axios(`${serverApi}/user/update`, {
+                method: "POST",
+                data: formData,
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            console.log("updateUser:", result);
+            
+            const user: User = result.data;
+            localStorage.setItem("userData", JSON.stringify(user));
+            return user;
+        } catch (err) {
+            console.log("ERROR, updateUser", err);
             throw err;
         }
     }

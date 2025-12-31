@@ -33,12 +33,12 @@ export interface LoginInput {
 }
 
 export interface UserUpdateInput {
-    _id: string;
+    _id?: string;
     userStatus?: UserStatus;
     userId?: string;
     userAge?: number;
     userPhone?: string;
     userPassword?: string;
     userAddress?: string;
-    userImage?: string;
+    userImage?: File | string;
 }
