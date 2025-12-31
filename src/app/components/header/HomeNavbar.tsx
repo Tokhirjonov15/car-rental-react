@@ -9,6 +9,7 @@ import { retrieveUser } from "../../screens/userPage/selector";
 import { logoutUser, setUser } from "../../screens/userPage/slice";
 import SignUpModal from "../auth/SignupModal";
 import SignInModal from "../auth/SigninModal";
+import { serverApi } from "../../../lib/config";
 
 /** REDUX SELECTOR */
 const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
@@ -65,6 +66,30 @@ export function HomeNavbar() {
     setOpenLogoutConfirm(false);
     alert('Logged out successfully!');
     history.push('/');
+  };
+
+    // User image path
+  const getUserImage = () => {
+    if (user?.userImage) {
+      let imagePath = user.userImage;
+      
+      if (imagePath.includes('\\') || imagePath.includes('/')) {
+        const parts = imagePath.split(/[\\/]/);
+        imagePath = parts[parts.length - 1];
+        imagePath = `uploads/users/${imagePath}`;
+      }
+      
+      const fullPath = `${serverApi}/${imagePath}`;
+      console.log("User image path:", fullPath);
+      console.log("User data:", user);
+      return fullPath;
+    }
+    console.log("No user image, using default");
+    return "/icons/default-user.svg";
+  };
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = "/icons/default-user.svg";
   };
 
   return (
@@ -130,9 +155,10 @@ export function HomeNavbar() {
                     Hello, {user.userId}!
                   </Typography>
                   <img
-                    src="/icons/default-user.svg"
+                    src={getUserImage()}
                     className="user-avatar"
-                    alt="user"
+                    alt={user.userId || "user"}
+                    onError={handleImageError}
                   />
                   <Button 
                     variant="outlined" 
