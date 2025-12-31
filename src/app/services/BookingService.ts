@@ -1,6 +1,6 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { Booking, BookingInquiry } from "../../lib/types/booking";
+import { Booking, BookingInput, BookingInquiry } from "../../lib/types/booking";
 
 class MyBookingsService {
     private readonly path: string;
@@ -33,32 +33,15 @@ class MyBookingsService {
         }
     }
 
-    public async createBooking(bookingData: any): Promise<Booking> {
+    public async createBooking(input: BookingInput): Promise<Booking> {
         try {
-            const url = `${this.path}/bookings`;
-            const result = await axios.post(url, bookingData, { 
-                withCredentials: true 
+            const url = `${this.path}/booking/create`;
+            const result = await axios.post(url, input, {
+            withCredentials: true,
             });
-            
-            console.log("createBooking:", result.data);
             return result.data;
         } catch (err) {
             console.log("Error createBooking:", err);
-            throw err;
-        }
-    }
-
-    public async getBookingById(bookingId: string): Promise<Booking> {
-        try {
-            const url = `${this.path}/bookings/${bookingId}`;
-            const result = await axios.get(url, { 
-                withCredentials: true 
-            });
-            
-            console.log("getBookingById:", result.data);
-            return result.data;
-        } catch (err) {
-            console.log("Error getBookingById:", err);
             throw err;
         }
     }

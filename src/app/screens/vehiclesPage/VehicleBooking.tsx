@@ -29,6 +29,7 @@ import { Vehicle } from "../../../lib/types/vehicle";
 import { retrieveChosenVehicle } from "./selector";
 import { serverApi } from "../../../lib/config";
 import "../../../css/vehicles.css";
+import BookingService from "../../services/BookingService";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -143,27 +144,57 @@ export default function BookingPage() {
     history.push(`/vehicles/${vehicleId}`);
   };
   // Confirm Booking Handler
-  const handleConfirmBooking = () => {
-    // Save booking info on localStorage
-    const bookingInfoToSave = {
-      pickupDate: bookingData.pickupDate,
-      returnDate: bookingData.returnDate,
-      totalDays: bookingData.totalDays,
-      totalAmount: calculateTotal(),
-    };
+  const handleConfirmBooking = async () => {
+  // Save booking info on localStorage
+  const bookingInfoToSave = {
+    pickupDate: bookingData.pickupDate,
+    returnDate: bookingData.returnDate,
+    totalDays: bookingData.totalDays,
+    totalAmount: calculateTotal(),
+  };
 
-    localStorage.setItem(
-      `booking_${vehicleId}`,
-      JSON.stringify(bookingInfoToSave)
-    );
+  localStorage.setItem(
+    `booking_${vehicleId}`,
+    JSON.stringify(bookingInfoToSave)
+  );
 
-    if (paymentMethod === "cash") {
+  if (paymentMethod === "cash") {
+    try {
+      if (!chosenVehicle || bookingData.totalDays === 0) {
+        alert("Booking information is incomplete");
+        return;
+      }
+
+      const bookingService = new BookingService();
+      const bookingInput = {
+        vehicleId: chosenVehicle._id,
+        rentDays: bookingData.totalDays,
+      };
+
+      await bookingService.createBooking(bookingInput);
+
       setShowSuccessAlert(true);
+      
       setTimeout(() => {
         localStorage.removeItem(`booking_${vehicleId}`);
         window.scrollTo(0, 0);
-        history.push("/vehicles");
+        history.push("/myBookings");
       }, 3000);
+      
+    } catch (err: any) {
+      console.error("Booking failed:", err);
+      
+      if (err.response) {
+        const errorMsg = err.response.data?.message || err.response.statusText;
+        alert(`Booking failed: ${errorMsg}`);
+        console.log("Error details:", err.response.data);
+      } else if (err.request) {
+        alert("No response from server. Please check your connection.");
+      } else {
+        alert(`Booking failed: ${err.message || "Please try again."}`);
+      }
+    }
+    
     } else if (paymentMethod === "card") {
       window.scrollTo(0, 0);
       history.push(`/vehicles/${vehicleId}/booking/cardPayment`);

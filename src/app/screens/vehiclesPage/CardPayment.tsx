@@ -24,6 +24,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
 import VehicleService from '../../services/VehicleService';
 import "../../../css/vehicles.css";
+import BookingService from '../../services/BookingService';
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -99,22 +100,6 @@ export default function PaymentPage() {
     );
   };
 
-  // Payment handler
-  const handlePayment = () => {
-    if (!isFormValid()) {
-      alert('Please fill in all fields');
-      return;
-    }
-
-    setShowSuccessAlert(true);
-    setTimeout(() => {
-      // Clear localStorage
-      localStorage.removeItem(`booking_${vehicleId}`);
-      window.scrollTo(0, 0);
-      history.push('/vehicles');
-    }, 3000);
-  };
-
   // Card number format 16 number
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, ''); // only numbers
@@ -139,6 +124,40 @@ export default function PaymentPage() {
     const value = e.target.value.replace(/\D/g, '');
     if (value.length <= 3) {
       setCvv(value);
+    }
+  };
+
+  const bookingHandler = async () => {
+    try {
+      if (!chosenVehicle || bookingInfo.totalDays === 0) {
+        alert("Booking information is incomplete");
+        return;
+      }
+
+      const bookingService = new BookingService();
+      const bookingInput = {
+        vehicleId: chosenVehicle._id,
+        rentDays: bookingInfo.totalDays,
+      };
+
+      await bookingService.createBooking(bookingInput);
+
+      setShowSuccessAlert(true);
+      setTimeout(() => {
+        localStorage.removeItem(`booking_${vehicleId}`);
+        window.scrollTo(0, 0);
+        history.push("/myBookings");
+      }, 3000);
+    } catch (err) {
+      console.error("Booking failed:", err);
+      
+      if (err) {
+        const errorMsg = err;
+        alert(`Booking failed: ${errorMsg}`);
+        console.log("Error details:", err);
+      } else {
+        alert("Booking failed. Please try again.");
+      }
     }
   };
 
@@ -311,7 +330,7 @@ export default function PaymentPage() {
                 size="large"
                 fullWidth
                 className="pay-button"
-                onClick={handlePayment}
+                onClick={bookingHandler}
                 disabled={!isFormValid()}
               >
                 Pay ${bookingInfo.totalAmount > 0 

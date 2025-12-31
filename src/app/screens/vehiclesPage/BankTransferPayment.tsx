@@ -27,6 +27,7 @@ import { retrieveChosenVehicle } from './selector';
 import { setChosenVehicle } from './slice';
 import VehicleService from '../../services/VehicleService';
 import "../../../css/vehicles.css";
+import BookingService from '../../services/BookingService';
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -109,14 +110,40 @@ export default function BankTransferPage() {
     window.scrollTo(0, 0);
     history.push(`/vehicles/${vehicleId}/booking`);
   };
-  const confirmBookingHandler = () => {
-    setShowSuccessAlert(true);
-    setTimeout(() => {
-      localStorage.removeItem(`booking_${vehicleId}`);
-      window.scrollTo(0, 0);
-      history.push('/vehicles');
-    }, 3000);
-  }
+
+  const bookingHandler = async () => {
+    try {
+      if (!chosenVehicle || bookingInfo.totalDays === 0) {
+        alert("Booking information is incomplete");
+        return;
+      }
+
+      const bookingService = new BookingService();
+      const bookingInput = {
+        vehicleId: chosenVehicle._id,
+        rentDays: bookingInfo.totalDays,
+      };
+
+      await bookingService.createBooking(bookingInput);
+
+      setShowSuccessAlert(true);
+      setTimeout(() => {
+        localStorage.removeItem(`booking_${vehicleId}`);
+        window.scrollTo(0, 0);
+        history.push("/myBookings");
+      }, 3000);
+    } catch (err) {
+      console.error("Booking failed:", err);
+      
+      if (err) {
+        const errorMsg = err;
+        alert(`Booking failed: ${errorMsg}`);
+        console.log("Error details:", err);
+      } else {
+        alert("Booking failed. Please try again.");
+      }
+    }
+  };
 
   return (
     <Container maxWidth="md" className="bank-transfer-page">
@@ -341,7 +368,7 @@ export default function BankTransferPage() {
               fullWidth
               className="confirm-btn"
               startIcon={<CheckCircleIcon />}
-              onClick={confirmBookingHandler}
+              onClick={bookingHandler}
             >
               Confirm Booking
             </Button>
