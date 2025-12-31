@@ -14,14 +14,19 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PaymentIcon from '@mui/icons-material/Payment';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
 import "../../../css/booking.css";
+import { setConfirmedBookings, setFinishedBookings } from './slice';
+
+const actionDispatch = (dispatch: Dispatch) => ({
+  setConfirmedBookings: (data: Booking[]) => dispatch(setConfirmedBookings(data)),
+  setFinishedBookings: (data: Booking[]) => dispatch(setFinishedBookings(data)),
+})
 
 interface Booking {
   id: string;
@@ -40,6 +45,9 @@ interface Booking {
 }
 
 export default function MyBookingsPage() {
+  const { setConfirmedBookings, setFinishedBookings } =
+    actionDispatch(useDispatch());
+
   const bookings: Booking[] = [
     {
       id: 'BK-2024-001234',
@@ -84,7 +92,7 @@ export default function MyBookingsPage() {
       totalAmount: 285.00,
       status: 'confirmed',
       paymentMethod: 'Cash',
-      rentalDays: 3,
+      rentalDays: 13,
     },
     {
       id: 'BK-2024-001237',
