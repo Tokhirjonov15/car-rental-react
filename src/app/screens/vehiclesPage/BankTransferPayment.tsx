@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Box,
@@ -10,15 +10,77 @@ import {
   Divider,
   IconButton,
   Chip,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import InfoIcon from '@mui/icons-material/Info';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Dispatch } from '@reduxjs/toolkit';
+import { createSelector } from "reselect";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from 'react-router-dom';
+import { Vehicle } from '../../../lib/types/vehicle';
+import { retrieveChosenVehicle } from './selector';
+import { setChosenVehicle } from './slice';
+import VehicleService from '../../services/VehicleService';
 import "../../../css/vehicles.css";
 
+/** REDUX SLICE & SELECTOR */
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenVehicle: (data: Vehicle) => dispatch(setChosenVehicle(data)),
+});
+const chosenVehicleRetriever = createSelector(
+  retrieveChosenVehicle,
+  (chosenVehicle) => ({
+    chosenVehicle,
+  })
+);
+
+interface BookingInfo {
+  pickupDate: string;
+  returnDate: string;
+  totalDays: number;
+  totalAmount: number;
+}
+
 export default function BankTransferPage() {
+  const { vehicleId } = useParams<{ vehicleId: string }>();
+  const { setChosenVehicle } = actionDispatch(useDispatch());
+  const { chosenVehicle } = useSelector(chosenVehicleRetriever);
+  const history = useHistory();
+
+  // Booking info from previous page (localStorage'dan olish)
+    const [bookingInfo, setBookingInfo] = useState<BookingInfo>({
+      pickupDate: '',
+      returnDate: '',
+      totalDays: 0,
+      totalAmount: 0,
+    });
+    
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  
+    useEffect(() => {
+    const vehicle = new VehicleService();
+    vehicle
+      .getVehicle(vehicleId)
+      .then((data) => setChosenVehicle(data))
+      .catch((err) => console.log(err));
+  
+    // retrieve booking info from localstorage
+    const savedBookingInfo = localStorage.getItem(`booking_${vehicleId}`);
+    console.log("localStorage key:", `booking_${vehicleId}`);
+    console.log("Saved booking info:", savedBookingInfo);
+    
+    if (savedBookingInfo) {
+      const parsed = JSON.parse(savedBookingInfo);
+      console.log("Parsed booking info:", parsed);
+      setBookingInfo(parsed);
+    }
+  }, [vehicleId]);
+
   const bankDetails = {
     companyName: 'MeritRentGo LLC',
     bankName: 'National Bank of Uzbekistan',
@@ -42,13 +104,42 @@ export default function BankTransferPage() {
     'Your booking will be confirmed once payment is verified',
   ];
 
+  /** HANDLERS */
+  const GoBackHandler = () => {
+    window.scrollTo(0, 0);
+    history.push(`/vehicles/${vehicleId}/booking`);
+  };
+  const confirmBookingHandler = () => {
+    setShowSuccessAlert(true);
+    setTimeout(() => {
+      localStorage.removeItem(`booking_${vehicleId}`);
+      window.scrollTo(0, 0);
+      history.push('/vehicles');
+    }, 3000);
+  }
+
   return (
     <Container maxWidth="md" className="bank-transfer-page">
+      <Snackbar
+        open={showSuccessAlert}
+        autoHideDuration={3000}
+        onClose={() => setShowSuccessAlert(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setShowSuccessAlert(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Booking Successfully Completed! 🎉
+        </Alert>
+      </Snackbar>
       <Stack spacing={4}>
         <Button
           variant="contained"
           startIcon={<ArrowBackIcon />}
           className="back-button"
+          onClick={GoBackHandler}
         >
           Back
         </Button>
@@ -181,7 +272,7 @@ export default function BankTransferPage() {
                       Vehicle
                     </Typography>
                     <Typography variant="body2" className="amount-value">
-                      {bookingSummary.carName}
+                      {chosenVehicle?.vehicleName}
                     </Typography>
                   </Box>
 
@@ -190,16 +281,19 @@ export default function BankTransferPage() {
                       Rental Period
                     </Typography>
                     <Typography variant="body2" className="amount-value">
-                      {bookingSummary.rentalDays} Days
+                      {bookingInfo.totalDays > 0 
+                        ? `${bookingInfo.totalDays} Day${bookingInfo.totalDays > 1 ? 's' : ''}`
+                        : 'N/A'
+                      }
                     </Typography>
                   </Box>
 
                   <Box className="amount-row">
                     <Typography variant="body2" className="amount-label">
-                      Booking ID
+                      Vehicle ID
                     </Typography>
                     <Typography variant="body2" className="amount-value booking-id">
-                      {bookingSummary.bookingId}
+                      {chosenVehicle?._id}
                     </Typography>
                   </Box>
 
@@ -209,8 +303,11 @@ export default function BankTransferPage() {
                     <Typography variant="h6" className="total-label">
                       Total Amount
                     </Typography>
-                    <Typography variant="h4" className="total-amount">
-                      ${bookingSummary.totalAmount}
+                    <Typography variant="h5" className="total-amount">
+                      ${bookingInfo.totalAmount > 0 
+                        ? bookingInfo.totalAmount.toFixed(2) 
+                        : '0.00'
+                      }
                     </Typography>
                   </Box>
                 </Stack>
@@ -238,6 +335,16 @@ export default function BankTransferPage() {
                 </Stack>
               </CardContent>
             </Card>
+            <Button
+              variant="contained"
+              size="large"
+              fullWidth
+              className="confirm-btn"
+              startIcon={<CheckCircleIcon />}
+              onClick={confirmBookingHandler}
+            >
+              Confirm Booking
+            </Button>
           </Box>
         </Box>
       </Stack>

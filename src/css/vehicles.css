@@ -431,6 +431,17 @@
   background-color: #f8f9fa;
 }
 
+.booking-page .back-button {
+  text-transform: none !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  transition: all 0.3s ease !important;
+  width: fit-content !important;
+  display: inline-flex !important;
+}
+
 .booking-page .page-header {
   text-align: center;
   margin-bottom: 24px;
@@ -1311,4 +1322,17 @@
 
 .bank-transfer-page .support-card {
   animation-delay: 0.3s;
+}
+
+.bank-transfer-page .confirm-btn {
+  margin-top: 24px !important;
+  margin-bottom: 12px !important;
+  padding: 14px 24px !important;
+  border-radius: 12px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  background-color: rgba(107, 114, 128, 1) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
 }

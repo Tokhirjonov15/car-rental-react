@@ -18,6 +18,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PaymentIcon from "@mui/icons-material/Payment";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useHistory, useParams } from "react-router-dom";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
@@ -137,33 +138,40 @@ export default function BookingPage() {
     return subtotal + tax;
   };
 
+  const GoBackHandler = () => {
+    window.scrollTo(0, 0);
+    history.push(`/vehicles/${vehicleId}`);
+  };
   // Confirm Booking Handler
   const handleConfirmBooking = () => {
-  // Save booking info on localStorage
-  const bookingInfoToSave = {
-    pickupDate: bookingData.pickupDate,
-    returnDate: bookingData.returnDate,
-    totalDays: bookingData.totalDays,
-    totalAmount: calculateTotal(),
-  };
-  
-  localStorage.setItem(`booking_${vehicleId}`, JSON.stringify(bookingInfoToSave));
+    // Save booking info on localStorage
+    const bookingInfoToSave = {
+      pickupDate: bookingData.pickupDate,
+      returnDate: bookingData.returnDate,
+      totalDays: bookingData.totalDays,
+      totalAmount: calculateTotal(),
+    };
 
-  if (paymentMethod === 'cash') {
-    setShowSuccessAlert(true);
-    setTimeout(() => {
-      localStorage.removeItem(`booking_${vehicleId}`);
+    localStorage.setItem(
+      `booking_${vehicleId}`,
+      JSON.stringify(bookingInfoToSave)
+    );
+
+    if (paymentMethod === "cash") {
+      setShowSuccessAlert(true);
+      setTimeout(() => {
+        localStorage.removeItem(`booking_${vehicleId}`);
+        window.scrollTo(0, 0);
+        history.push("/vehicles");
+      }, 3000);
+    } else if (paymentMethod === "card") {
       window.scrollTo(0, 0);
-      history.push('/vehicles');
-    }, 3000);
-  } else if (paymentMethod === 'card') {
-    window.scrollTo(0, 0);
-    history.push(`/vehicles/${vehicleId}/booking/cardPayment`);
-  } else if (paymentMethod === 'bank') {
-    window.scrollTo(0, 0);
-    history.push(`/vehicles/${vehicleId}/booking/bankTransferPayment`);
-  }
-};
+      history.push(`/vehicles/${vehicleId}/booking/cardPayment`);
+    } else if (paymentMethod === "bank") {
+      window.scrollTo(0, 0);
+      history.push(`/vehicles/${vehicleId}/booking/bankTransferPayment`);
+    }
+  };
 
   const paymentMethods = [
     { value: "card", label: "Credit/Debit Card" },
@@ -189,6 +197,14 @@ export default function BookingPage() {
       </Snackbar>
 
       <Stack spacing={4}>
+        <Button
+          variant="contained"
+          startIcon={<ArrowBackIcon />}
+          className="back-button"
+          onClick={GoBackHandler}
+        >
+          Back
+        </Button>
         <Box className="page-header">
           <Typography variant="h3" className="page-title">
             Complete Your Booking

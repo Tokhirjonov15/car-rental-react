@@ -21,9 +21,9 @@ import { setChosenVehicle } from './slice';
 import { Dispatch } from '@reduxjs/toolkit';
 import { createSelector } from "reselect";
 import { useSelector, useDispatch } from "react-redux";
-import "../../../css/vehicles.css";
 import { useHistory, useParams } from 'react-router-dom';
 import VehicleService from '../../services/VehicleService';
+import "../../../css/vehicles.css";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
