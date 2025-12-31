@@ -3,6 +3,7 @@ import reduxLogger from "redux-logger";
 import homePageReducer from './screens/homePage/slice';
 import vehiclesPageReducer from './screens/vehiclesPage/slice';
 import UserReducer from './screens/userPage/slice';
+import MyBookingsPageReducer from './screens/myBookingsPage/slice';
 
 export const store = configureStore({
   middleware: (getDefaultMiddleware) => 
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     homePage: homePageReducer,
     vehiclesPage: vehiclesPageReducer,
+    myBookingsPage: MyBookingsPageReducer,
     userPage: UserReducer
   },
 });

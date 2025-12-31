@@ -7,6 +7,7 @@ import { Vehicle } from "../../../lib/types/vehicle";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
 import "../../../css/home.css";
+import { retrieveUser } from "../userPage/selector";
 
 /** REDUX SLICE & SELECTOR */
 const popularVehiclesRetriever = createSelector(
@@ -14,13 +15,22 @@ const popularVehiclesRetriever = createSelector(
   (popularVehicles) => ({ popularVehicles })
 );
 
+const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
 
 export default function PopularVehicles() {
   const { popularVehicles } = useSelector(popularVehiclesRetriever);
+  const { user } = useSelector(userRetriever); // User'ni olish
   const history = useHistory();
 
   /** HANDLERS */
   const chooseCarHandler = (id: string) => {
+    if (!user) {
+      alert("You are not authenticated, please login first!");
+      window.scrollTo(0, 0);
+      history.push("/");
+      return;
+    }
+    
     window.scrollTo(0, 0);
     history.push(`/vehicles/${id}`);
   };

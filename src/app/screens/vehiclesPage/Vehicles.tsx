@@ -25,6 +25,7 @@ import { serverApi } from "../../../lib/config";
 import "../../../css/vehicles.css";
 import { useHistory } from "react-router-dom";
 import { VehicleCollection, VehicleFuel } from "../../../lib/enums/vehicle.enum";
+import { retrieveUser } from "../userPage/selector";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -36,9 +37,12 @@ const vehiclesRetriever = createSelector(
   (vehicles) => vehicles || []
 );
 
+const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
+
 export default function Vehicles() {
   const { setVehicles } = actionDispatch(useDispatch());
   const vehicles = useSelector(vehiclesRetriever);
+  const { user } = useSelector(userRetriever);
   const [vehicleSearch, setVehicleSearch] = useState<VehicleInquiry>({
       page: 1,
       limit: 20,
@@ -106,6 +110,14 @@ const clearSearch = () => {
 };
 
 const chooseCarHandler = (id: string) => {
+  if (!user) {
+    alert("You are not authenticated, please login first!");
+    window.scrollTo(0, 0);
+    history.push("/");
+    return;
+  }
+  
+  window.scrollTo(0, 0);
   history.push(`/vehicles/${id}`);
 };
 

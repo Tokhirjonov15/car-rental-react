@@ -30,6 +30,6 @@ export interface Booking {
 
 export interface BookingInquiry {
     page: number;
-    limit?: number;
-    bookingStatus?: BookingStatus;
+    limit: number;
+    bookingStatus: BookingStatus;
 }
