@@ -16,21 +16,26 @@ import CloseIcon from '@mui/icons-material/Close';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import PersonIcon from '@mui/icons-material/Person';
-import PhoneIcon from '@mui/icons-material/Phone';
 import LockIcon from '@mui/icons-material/Lock';
-import CakeIcon from '@mui/icons-material/Cake';
-import { UserInput } from '../../../lib/types/user';
+import { LoginInput } from '../../../lib/types/user';
 import UserService from '../../services/UserService';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from '@reduxjs/toolkit';
+import { setUser } from '../../screens/userPage/slice';
 
-interface SignUpModalProps {
+interface SignInModalProps {
   open: boolean;
   onClose: () => void;
 }
 
-export default function SignUpModal({ open, onClose }: SignUpModalProps) {
+/** REDUX DISPATCH */
+const actionDispatch = (dispatch: Dispatch) => ({
+  setUser: (data: any) => dispatch(setUser(data)),
+});
+
+export default function SignInModal({ open, onClose }: SignInModalProps) {
+  const { setUser } = actionDispatch(useDispatch());
   const [userId, setUserId] = useState<string>('');
-  const [userPhone, setUserPhone] = useState<string>('');
-  const [userAge, setUserAge] = useState<string>(''); 
   const [userPassword, setUserPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState('');
@@ -41,46 +46,11 @@ export default function SignUpModal({ open, onClose }: SignUpModalProps) {
       setError('User ID is required');
       return false;
     }
-    if (!userPhone.trim()) {
-      setError('Phone number is required');
-      return false;
-    }
-    if (userPhone.length < 9) {
-      setError('Phone number must be at least 9 digits');
-      return false;
-    }
-    if (!userAge.trim()) {
-      setError('Age is required');
-      return false;
-    }
-    const age = parseInt(userAge);
-    if (isNaN(age) || age < 19) {
-      setError('You must be at least 19 years old to sign up');
-      return false;
-    }
     if (!userPassword.trim()) {
       setError('Password is required');
       return false;
     }
-    if (userPassword.length < 6) {
-      setError('Password must be at least 6 characters');
-      return false;
-    }
     return true;
-  };
-
-  // Handle phone input (only numbers)
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '');
-    setUserPhone(value);
-  };
-
-  // Handle age input (only numbers)
-  const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '');
-    if (value === '' || parseInt(value) <= 120) {
-      setUserAge(value);
-    }
   };
 
   // Handle submit
@@ -92,31 +62,32 @@ export default function SignUpModal({ open, onClose }: SignUpModalProps) {
     }
 
     try {
-      console.log("Signup Inputs:", userId, userPhone, userAge, userPassword);
-      const signupInput: UserInput = {
+      console.log("Login Inputs:", userId, userPassword);
+      const loginInput: LoginInput = {
         userId: userId,
-        userPhone: userPhone,
-        userAge: parseInt(userAge),
         userPassword: userPassword,
       };
 
       const user = new UserService();
-      const result = await user.signup(signupInput);
-      console.log("Signup successful:", result);
+      const result = await user.login(loginInput);
+      console.log("Login successful:", result);
       
-      alert('Sign up successful! Welcome to our platform! 🎉');
+      // Save User info to Redux store
+      setUser(result);
       
+      // Save User info to localStorage
+      localStorage.setItem('user', JSON.stringify(result));
+      
+      alert('Login successful! Welcome back! 🎉');
       handleClose();
     } catch (err: any) {
-      console.log("Signup error:", err);
-      setError(err?.message || 'Sign up failed. Please try again.');
+      console.log("Login error:", err);
+      setError(err?.message || 'Login failed. Please check your credentials.');
     }
   };
 
   const handleClose = () => {
     setUserId('');
-    setUserPhone('');
-    setUserAge('');
     setUserPassword('');
     setShowPassword(false);
     setError('');
@@ -139,14 +110,14 @@ export default function SignUpModal({ open, onClose }: SignUpModalProps) {
       <DialogTitle>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Typography variant="h5" fontWeight={600}>
-            Sign Up
+            Sign In
           </Typography>
           <IconButton onClick={handleClose} size="small">
             <CloseIcon />
           </IconButton>
         </Stack>
         <Typography variant="body2" color="text.secondary" mt={1}>
-          Create your account to get started
+          Welcome back! Please login to your account
         </Typography>
       </DialogTitle>
 
@@ -164,6 +135,9 @@ export default function SignUpModal({ open, onClose }: SignUpModalProps) {
             fullWidth
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit();
+            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -174,43 +148,15 @@ export default function SignUpModal({ open, onClose }: SignUpModalProps) {
           />
 
           <TextField
-            label="Phone Number"
-            placeholder="010 1234 5678"
-            fullWidth
-            value={userPhone}
-            onChange={handlePhoneChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <PhoneIcon color="action" />
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <TextField
-            label="Age"
-            placeholder="Enter your age"
-            fullWidth
-            value={userAge}
-            onChange={handleAgeChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <CakeIcon color="action" />
-                </InputAdornment>
-              ),
-            }}
-            helperText="You must be at least 19 years old"
-          />
-
-          <TextField
             label="Password"
             placeholder="Enter your password"
             type={showPassword ? 'text' : 'password'}
             fullWidth
             value={userPassword}
             onChange={(e) => setUserPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit();
+            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -229,10 +175,6 @@ export default function SignUpModal({ open, onClose }: SignUpModalProps) {
               ),
             }}
           />
-
-          <Typography variant="caption" color="text.secondary">
-            Password must be at least 6 characters long
-          </Typography>
         </Stack>
       </DialogContent>
 
@@ -250,7 +192,7 @@ export default function SignUpModal({ open, onClose }: SignUpModalProps) {
           variant="contained"
           fullWidth
         >
-          Sign Up
+          Sign In
         </Button>
       </DialogActions>
     </Dialog>

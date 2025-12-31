@@ -1,13 +1,39 @@
-import { Box, Stack, Container, Button } from "@mui/material";
+import { Box, Stack, Container, Button, Typography, DialogTitle, DialogContent, DialogActions, Dialog } from "@mui/material";
 import { NavLink, useHistory } from "react-router-dom";
 import "../../../css/navbar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { createSelector } from "reselect";
+import { Dispatch } from "@reduxjs/toolkit";
+import { retrieveUser } from "../../screens/userPage/selector";
+import { logoutUser, setUser } from "../../screens/userPage/slice";
 import SignUpModal from "../auth/SignupModal";
+import SignInModal from "../auth/SigninModal";
 
-export function HomeNavbar () {
-  const authMember = null;
+/** REDUX SELECTOR */
+const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
+
+/** REDUX DISPATCH */
+const actionDispatch = (dispatch: Dispatch) => ({
+  setUser: (data: any) => dispatch(setUser(data)),
+  logoutUser: () => dispatch(logoutUser()),
+});
+
+export function HomeNavbar() {
+  const { user } = useSelector(userRetriever);
+  const { setUser, logoutUser } = actionDispatch(useDispatch());
   const history = useHistory();
   const [openSignUp, setOpenSignUp] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);  
+  const [openLogoutConfirm, setOpenLogoutConfirm] = useState(false);
+
+  // Retrieve user info from localStorage
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser && !user) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
 
   const handleSignUpOpen = () => {
     setOpenSignUp(true);
@@ -15,6 +41,30 @@ export function HomeNavbar () {
 
   const handleSignUpClose = () => {
     setOpenSignUp(false);
+  };
+
+  const handleSignInOpen = () => {
+    setOpenSignIn(true);
+  };
+
+  const handleSignInClose = () => {
+    setOpenSignIn(false);
+  };
+
+  const handleLogoutClick = () => {
+    setOpenLogoutConfirm(true);
+  };
+
+  const handleLogoutCancel = () => {
+    setOpenLogoutConfirm(false);
+  };
+
+  const handleLogoutConfirm = () => {
+    logoutUser();
+    localStorage.removeItem('user');
+    setOpenLogoutConfirm(false);
+    alert('Logged out successfully!');
+    history.push('/');
   };
 
   return (
@@ -44,19 +94,19 @@ export function HomeNavbar () {
               <NavLink to="/vehicles" className="nav-link">
                 Vehicles
               </NavLink>
-              {authMember ? (
+              {user ? (
                 <NavLink to="/myBookings" className="nav-link">
                   My Bookings
                 </NavLink>
               ) : null}
-              {authMember ? (
+              {user ? (
                 <NavLink to="/user" className="nav-link">
                   User
                 </NavLink>
               ) : null}
               <NavLink to="/help" className="nav-link">
                 Help
-              </NavLink>       
+              </NavLink>
             </Stack>
 
             <Stack
@@ -65,33 +115,91 @@ export function HomeNavbar () {
               spacing={2}
               className="auth-area"
             >
-              {!authMember ? (
+              {!user ? (
                 <>
-                  <Button className="sign-in">Sign In</Button>
-                  <Button 
-                    className="sign-up"
-                    onClick={handleSignUpOpen}
-                  >
-                      Sign Up
+                  <Button className="sign-in" onClick={handleSignInOpen}>
+                    Sign In
+                  </Button>
+                  <Button className="sign-up" onClick={handleSignUpOpen}>
+                    Sign Up
                   </Button>
                 </>
               ) : (
-                <img
-                  src="/icons/default-user.svg"
-                  className="user-avatar"
-                  alt="user"
-                />
+                <Stack color="white" direction="row" alignItems="center" spacing={2}>
+                  <Typography variant="h3">
+                    Hello, {user.userId}!
+                  </Typography>
+                  <img
+                    src="/icons/default-user.svg"
+                    className="user-avatar"
+                    alt="user"
+                  />
+                  <Button 
+                    variant="outlined" 
+                    size="small"
+                    onClick={handleLogoutClick}
+                    sx={{
+                      backgroundColor: 'white',
+                      color: 'black',
+                      borderColor: 'white',
+                      '&:hover': {
+                        backgroundColor: '#bcb6b6ff',
+                        borderColor: 'white',
+                      }
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </Stack>
               )}
             </Stack>
           </Stack>
         </Container>
       </div>
 
-      {/* SignUp Modal */}
-      <SignUpModal 
-        open={openSignUp} 
-        onClose={handleSignUpClose} 
-      />
+      <SignUpModal open={openSignUp} onClose={handleSignUpClose} />
+
+      <SignInModal open={openSignIn} onClose={handleSignInClose} />
+
+      <Dialog
+        open={openLogoutConfirm}
+        onClose={handleLogoutCancel}
+        maxWidth="xs"
+        fullWidth
+        PaperProps={{
+          style: {
+            borderRadius: '16px',
+            padding: '8px',
+          },
+        }}
+      >
+        <DialogTitle>
+          <Typography variant="h6" fontWeight={600}>
+            Confirm Logout
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
+            Are you sure you want to logout?
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ padding: '16px 24px' }}>
+          <Button 
+            onClick={handleLogoutCancel}
+            variant="outlined"
+            sx={{ mr: 1 }}
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={handleLogoutConfirm}
+            variant="contained"
+            color="error"
+          >
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
-};
+}

@@ -42,7 +42,6 @@ export default function PopularVehicles() {
           {popularVehicles.length !== 0 ? (
             popularVehicles.map((ele: Vehicle) => {
               const imagePath = `${serverApi}/${ele.vehicleImages[0]}`;
-              console.log("IMAGE PATH:", imagePath);
 
               return (
               <Card key={ele._id} className="vehicle-card">

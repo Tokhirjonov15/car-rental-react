@@ -5,6 +5,7 @@ import { Vehicle } from "./vehicle"
 export interface AppRootState {
     homePage: HomePageState;
     vehiclesPage: VehiclesPageState;
+    userPage: UserPage;
 }
 
 /** HOMEPAGE */
@@ -21,4 +22,11 @@ export interface VehiclesPageState {
     vehicles: Vehicle[];
 }
 
-/** BOOKINGS PAGE */
+/** USER PAGE */
+export interface UserState {
+  user: User | null;
+}
+
+export interface UserPage {
+  user: User | null;
+}
