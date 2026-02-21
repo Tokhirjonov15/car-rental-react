@@ -1,0 +1,22 @@
+services:
+  car-rental-next:
+    container_name: car-rental-next
+    restart: always
+    image: node:20.10.0
+    ports:
+      - 5000:3000
+    environment:
+      - PORT=3000
+    volumes:
+      - ./:/usr/src/car-rental-next
+    working_dir: /usr/src/car-rental-next
+
+    networks:
+      - production
+
+    # FOR PRODUCTION
+    command: bash -c "yarn && yarn run build && yarn run start"
+
+networks:
+  production:
+    driver: bridge
