@@ -9,7 +9,7 @@ const brands = [
   { name: "HONDA", logo: "/icons/honda.png" },
 ];
 
-export default function BrandRow() {
+export function BrandRow() {
   return (
     <div className="brand-row">
       <Container maxWidth="lg">

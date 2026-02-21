@@ -17,7 +17,7 @@ const popularVehiclesRetriever = createSelector(
 
 const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
 
-export default function PopularVehicles() {
+export function PopularVehicles() {
   const { popularVehicles } = useSelector(popularVehiclesRetriever);
   const { user } = useSelector(userRetriever); // User'ni olish
   const history = useHistory();

@@ -2,7 +2,7 @@ import { Box, Stack, Typography, Button, Container } from "@mui/material";
 import { useState } from "react";
 import "../../../css/home.css";
 
-export default function AboutUs() {
+export function AboutUs() {
   const [open, setOpen] = useState(false);
 
   return (
