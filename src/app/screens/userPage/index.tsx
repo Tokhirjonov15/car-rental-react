@@ -17,6 +17,8 @@ import {
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser as setUserAction } from './slice';
 import UserService from '../../services/UserService';
 import { serverApi } from '../../../lib/config';
 import { User } from '../../../lib/types/user';
@@ -24,6 +26,7 @@ import '../../../css/users.css';
 
 export default function UserPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -130,6 +133,7 @@ export default function UserPage() {
       
       // Update local state
       setUser(updatedUser);
+      dispatch(setUserAction(updatedUser));
       setShowSuccessAlert(true);
 
       // Reset image selection va preview ni yangilangan user image ga o'rnatish
@@ -191,7 +195,7 @@ export default function UserPage() {
           severity="success"
           sx={{ width: '100%' }}
         >
-          Profile updated successfully! 🎉
+          Profile updated successfully!
         </Alert>
       </Snackbar>
 
@@ -261,7 +265,7 @@ export default function UserPage() {
               </Typography>
               {selectedImage && (
                 <Typography variant="caption" color="primary">
-                  ✓ New image selected
+                  New image selected
                 </Typography>
               )}
             </Stack>
@@ -333,3 +337,4 @@ export default function UserPage() {
     </Container>
   );
 }
+

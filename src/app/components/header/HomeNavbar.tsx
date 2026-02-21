@@ -1,7 +1,7 @@
 import { Box, Stack, Container, Button, Typography, DialogTitle, DialogContent, DialogActions, Dialog } from "@mui/material";
 import { NavLink, useHistory } from "react-router-dom";
 import "../../../css/navbar.css";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createSelector } from "reselect";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -27,10 +27,11 @@ export function HomeNavbar() {
   const [openSignUp, setOpenSignUp] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);  
   const [openLogoutConfirm, setOpenLogoutConfirm] = useState(false);
+  const imageVersion = useMemo(() => Date.now(), [user]);
 
   // Retrieve user info from localStorage
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
+    const savedUser = localStorage.getItem('userData');
     if (savedUser && !user) {
       setUser(JSON.parse(savedUser));
     }
@@ -62,7 +63,7 @@ export function HomeNavbar() {
 
   const handleLogoutConfirm = () => {
     logoutUser();
-    localStorage.removeItem('user');
+    localStorage.removeItem('userData');
     setOpenLogoutConfirm(false);
     alert('Logged out successfully!');
     history.push('/');
@@ -79,7 +80,7 @@ export function HomeNavbar() {
         imagePath = `uploads/users/${imagePath}`;
       }
       
-      const fullPath = `${serverApi}/${imagePath}`;
+      const fullPath = `${serverApi}/${imagePath}?v=${imageVersion}`;
       console.log("User image path:", fullPath);
       console.log("User data:", user);
       return fullPath;
@@ -229,3 +230,4 @@ export function HomeNavbar() {
     </>
   );
 }
+
