@@ -130,6 +130,28 @@
   border-top: 1px solid #e5e7eb;
 }
 
+.mobile-auth-area .sign-in.MuiButton-root {
+  width: 100%;
+  justify-content: flex-start;
+  color: #111827;
+  background: #f3f4f6;
+  border-radius: 8px;
+  text-transform: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mobile-auth-area .sign-in.MuiButton-root:hover {
+  color: #111827;
+  background: #e5e7eb;
+}
+
+.mobile-auth-area .sign-up.MuiButton-root {
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 16px;
+}
+
 @media (max-width: 900px) {
   .navbar {
     height: 72px;

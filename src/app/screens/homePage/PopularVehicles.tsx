@@ -48,7 +48,7 @@ export function PopularVehicles() {
             </Typography>
           </Box>
         </Stack>
-        <Stack direction="row" spacing={3} >
+        <Stack direction={{ xs: "column", md: "row" }} spacing={3} className="popular-vehicles-row">
           {popularVehicles.length !== 0 ? (
             popularVehicles.map((ele: Vehicle) => {
               const imagePath = `${serverApi}/${ele.vehicleImages[0]}`;

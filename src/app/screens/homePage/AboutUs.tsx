@@ -8,7 +8,7 @@ export function AboutUs() {
   return (
     <div className="why-section">
       <Container className="why-wrapper">
-        <Stack direction="row" spacing={6} alignItems="center">
+        <Stack direction={{ xs: "column", md: "row" }} spacing={6} alignItems={{ xs: "stretch", md: "center" }}>
           <Box className="why-image">
             <img src="/img/aboutus.png" alt="Driving" />
 

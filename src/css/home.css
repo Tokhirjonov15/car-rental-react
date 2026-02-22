@@ -1087,6 +1087,10 @@
     padding: 40px 0;
   }
 
+  .popular-vehicles-row {
+    width: 100%;
+  }
+
   .vehicle-card {
     width: 100%;
   }
@@ -1095,9 +1099,20 @@
     padding: 40px 16px;
   }
 
+  .why-image {
+    width: 100%;
+  }
+
   .why-image img {
     width: 100%;
     max-width: 100%;
+  }
+
+  .support-card {
+    position: static;
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .why-content {
