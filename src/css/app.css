@@ -26,6 +26,24 @@
   color: rgb(112, 76, 182);
 }
 
+#pc-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main {
+  flex: 1;
+}
+
+#footer {
+  margin-top: auto;
+}
+
+#pc-wrap.mobile-wrap #main {
+  overflow-x: hidden;
+}
+
 @keyframes App-logo-float {
   0% {
     transform: translateY(0);

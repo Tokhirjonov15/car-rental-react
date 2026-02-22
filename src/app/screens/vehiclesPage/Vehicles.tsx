@@ -26,6 +26,7 @@ import "../../../css/vehicles.css";
 import { useHistory } from "react-router-dom";
 import { VehicleCollection, VehicleFuel } from "../../../lib/enums/vehicle.enum";
 import { retrieveUser } from "../userPage/selector";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -40,6 +41,8 @@ const vehiclesRetriever = createSelector(
 const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
 
 export default function Vehicles() {
+  const device = useDeviceDetect();
+  const isMobile = device === "mobile";
   const { setVehicles } = actionDispatch(useDispatch());
   const vehicles = useSelector(vehiclesRetriever);
   const { user } = useSelector(userRetriever);
@@ -155,7 +158,7 @@ const chooseCarHandler = (id: string) => {
         </Box>
       </Box>
 
-      <Stack direction="row" spacing={4}>
+      <Stack direction={isMobile ? "column" : "row"} spacing={isMobile ? 2 : 4}>
         <Stack className="cars-sidebar">
           <Stack spacing={3}>
             <Typography className="sidebar-title">

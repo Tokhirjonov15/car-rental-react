@@ -137,3 +137,32 @@
   animation: footerFadeInUp 0.6s ease-out 0.2s;
   animation-fill-mode: both;
 }
+
+@media (max-width: 900px) {
+  .footer-section {
+    padding-top: 36px;
+    padding-bottom: 20px;
+  }
+
+  .footer-section .footer-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-section .company-name {
+    font-size: 1.5rem;
+  }
+
+  .footer-section .about-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .footer-section .contact-section .section-title {
+    font-size: 18px;
+  }
+
+  .footer-section .copyright-text {
+    font-size: 16px;
+  }
+}

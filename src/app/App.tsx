@@ -8,11 +8,17 @@ import UserPage from './screens/userPage';
 import HelpPage from './screens/helpPage';
 import MyBookingsPage from './screens/myBookingsPage';
 import "../css/app.css";
+import useDeviceDetect from './hooks/useDeviceDetect';
 
 function App() {
+  const device = useDeviceDetect();
+
   return (
-    <>
-      <HomeNavbar />
+    <div id="pc-wrap" className={device === "mobile" ? "mobile-wrap" : "desktop-wrap"}>
+      <div id="top">
+        <HomeNavbar />
+      </div>
+      <div id="main">
         <Switch>
           <Route path="/vehicles">
             <VehiclesPage />
@@ -30,8 +36,11 @@ function App() {
             <HomePage />
           </Route>
         </Switch>
-      <Footer />
-    </>
+      </div>
+      <div id="footer">
+        <Footer />
+      </div>
+    </div>
   );
 }
 

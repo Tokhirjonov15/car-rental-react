@@ -490,3 +490,63 @@
 .my-bookings-page .page-header-section .bookings-summary .summary-item:nth-child(3) {
   animation-delay: 0.3s;
 }
+
+@media (max-width: 900px) {
+  .my-bookings-page {
+    padding: 20px 12px;
+  }
+
+  .my-bookings-page .page-header-section {
+    gap: 14px;
+  }
+
+  .my-bookings-page .page-header-section .page-title-wrapper {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .my-bookings-page .page-header-section .page-title-wrapper .page-title {
+    font-size: 1.6rem;
+  }
+
+  .my-bookings-page .page-header-section .page-title-wrapper .page-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .my-bookings-page .bookings-list .booking-card .booking-card-content {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px !important;
+  }
+
+  .my-bookings-page .bookings-list .booking-card .booking-details-section .details-grid .detail-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .my-bookings-page .bookings-list .booking-card .booking-actions-section {
+    width: 100%;
+    min-width: 0;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .my-bookings-page .bookings-list .booking-card .booking-actions-section .price-section {
+    padding: 12px;
+  }
+
+  .my-bookings-page .bookings-list .booking-card .booking-actions-section .price-section .price-value {
+    font-size: 1.5rem;
+  }
+
+  .my-bookings-page .bookings-list .empty-state-card .MuiCardContent-root {
+    padding: 36px 16px;
+  }
+
+  .delete-dialog .dialog-title,
+  .delete-dialog .dialog-content,
+  .delete-dialog .dialog-actions {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

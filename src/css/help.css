@@ -135,3 +135,43 @@
   line-height: 1.7;
   font-size: 0.95rem;
 }
+
+@media (max-width: 900px) {
+  .help-page {
+    padding-top: 20px;
+    padding-bottom: 24px;
+  }
+
+  .help-page .page-header {
+    margin-bottom: 14px;
+  }
+
+  .help-page .page-header .page-title {
+    font-size: 1.8rem;
+  }
+
+  .help-page .page-header .page-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .help-page .help-section .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 12px;
+  }
+
+  .help-page .help-section .section-header .section-title {
+    font-size: 1.3rem;
+  }
+
+  .help-page .faq-accordion .accordion-summary,
+  .help-page .terms-accordion .accordion-summary {
+    padding: 14px 14px;
+  }
+
+  .help-page .faq-accordion .accordion-details,
+  .help-page .terms-accordion .accordion-details {
+    padding: 0 14px 14px 14px;
+  }
+}

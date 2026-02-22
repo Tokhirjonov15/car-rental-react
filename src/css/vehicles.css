@@ -1336,3 +1336,142 @@
   color: #fff !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1) !important;
 }
+
+@media (max-width: 900px) {
+  .cars-page {
+    padding: 20px 0;
+  }
+
+  .cars-page .cars-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .cars-page .cars-header-title {
+    font-size: 24px;
+  }
+
+  .cars-page .cars-search {
+    position: static;
+    width: 100%;
+  }
+
+  .cars-page .cars-search-input {
+    width: 100%;
+    height: 48px;
+    font-size: 13px;
+  }
+
+  .cars-page .search-btn {
+    height: 48px;
+    padding: 0 16px;
+  }
+
+  .cars-page .cars-sidebar {
+    width: 100%;
+  }
+
+  .cars-page .sidebar-title,
+  .cars-page .sidebar-label,
+  .cars-page .sidebar-list {
+    padding-left: 0;
+  }
+
+  .cars-page .sidebar-title {
+    font-size: 26px;
+  }
+
+  .cars-page .sidebar-label {
+    font-size: 16px;
+  }
+
+  .cars-page .car-card {
+    width: 100%;
+  }
+
+  .chosen-vehicle-page {
+    padding-top: 22px;
+  }
+
+  .chosen-vehicle-page .vehicle-content {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .chosen-vehicle-page .main-image-wrapper {
+    height: 260px;
+  }
+
+  .chosen-vehicle-page .vehicle-details {
+    padding: 18px;
+    position: relative;
+    top: 0;
+  }
+
+  .chosen-vehicle-page .vehicle-name {
+    font-size: 1.6rem;
+  }
+
+  .chosen-vehicle-page .spec-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-page {
+    padding-top: 22px;
+    padding-bottom: 24px;
+  }
+
+  .booking-page .booking-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .booking-page .form-section .MuiCardContent-root,
+  .booking-page .summary-card .MuiCardContent-root {
+    padding: 18px !important;
+  }
+
+  .booking-page .booking-summary {
+    position: relative;
+    top: 0;
+  }
+
+  .payment-page {
+    padding-top: 22px;
+    padding-bottom: 24px;
+  }
+
+  .payment-page .page-header .page-title {
+    font-size: 1.5rem;
+  }
+
+  .payment-page .payment-form-card .MuiCardContent-root,
+  .payment-page .summary-card .MuiCardContent-root {
+    padding: 18px !important;
+  }
+
+  .bank-transfer-page {
+    padding: 20px 12px;
+  }
+
+  .bank-transfer-page .transfer-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bank-transfer-page .page-header .page-title {
+    font-size: 1.8rem;
+  }
+
+  .bank-transfer-page .bank-details-card .MuiCardContent-root,
+  .bank-transfer-page .amount-card .MuiCardContent-root,
+  .bank-transfer-page .instructions-card .MuiCardContent-root {
+    padding: 18px;
+  }
+
+  .bank-transfer-page .amount-card .total-amount {
+    font-size: 1.7rem;
+  }
+}

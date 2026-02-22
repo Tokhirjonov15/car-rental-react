@@ -1,4 +1,4 @@
-import { Box, Stack, Container, Button, Typography, DialogTitle, DialogContent, DialogActions, Dialog } from "@mui/material";
+import { Box, Stack, Container, Button, Typography, DialogTitle, DialogContent, DialogActions, Dialog, IconButton, Drawer } from "@mui/material";
 import { NavLink, useHistory } from "react-router-dom";
 import "../../../css/navbar.css";
 import { useEffect, useMemo, useState } from "react";
@@ -10,6 +10,9 @@ import { logoutUser, setUser } from "../../screens/userPage/slice";
 import SignUpModal from "../auth/SignupModal";
 import SignInModal from "../auth/SigninModal";
 import { serverApi } from "../../../lib/config";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 /** REDUX SELECTOR */
 const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
@@ -21,12 +24,15 @@ const actionDispatch = (dispatch: Dispatch) => ({
 });
 
 export function HomeNavbar() {
+  const device = useDeviceDetect();
+  const isMobile = device === "mobile";
   const { user } = useSelector(userRetriever);
   const { setUser, logoutUser } = actionDispatch(useDispatch());
   const history = useHistory();
   const [openSignUp, setOpenSignUp] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);  
   const [openLogoutConfirm, setOpenLogoutConfirm] = useState(false);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const imageVersion = useMemo(() => Date.now(), [user]);
 
   // Retrieve user info from localStorage
@@ -54,6 +60,7 @@ export function HomeNavbar() {
   };
 
   const handleLogoutClick = () => {
+    setOpenMobileMenu(false);
     setOpenLogoutConfirm(true);
   };
 
@@ -67,6 +74,10 @@ export function HomeNavbar() {
     setOpenLogoutConfirm(false);
     alert('Logged out successfully!');
     history.push('/');
+  };
+
+  const closeMobileMenu = () => {
+    setOpenMobileMenu(false);
   };
 
     // User image path
@@ -101,6 +112,7 @@ export function HomeNavbar() {
             direction="row"
             alignItems="center"
             justifyContent="space-between"
+            className="navbar-row"
           >
             <Stack direction="row" alignItems="center" spacing={2.5}>
               <Box className="logo-icon">
@@ -113,7 +125,7 @@ export function HomeNavbar() {
               <Box className="logo-text">MeritRentGo</Box>
             </Stack>
 
-            <Stack direction="row" spacing={4}>
+            <Stack direction="row" spacing={4} className="desktop-nav-links">
               <NavLink to="/" className="nav-link">
                 Home
               </NavLink>
@@ -139,7 +151,7 @@ export function HomeNavbar() {
               direction="row"
               alignItems="center"
               spacing={2}
-              className="auth-area"
+              className="auth-area desktop-auth-area"
             >
               {!user ? (
                 <>
@@ -180,9 +192,76 @@ export function HomeNavbar() {
                 </Stack>
               )}
             </Stack>
+
+            {isMobile && (
+              <IconButton className="mobile-menu-btn" onClick={() => setOpenMobileMenu(true)}>
+                <MenuIcon />
+              </IconButton>
+            )}
           </Stack>
         </Container>
       </div>
+
+      <Drawer anchor="right" open={openMobileMenu} onClose={closeMobileMenu}>
+        <Box className="mobile-menu-drawer">
+          <Stack direction="row" alignItems="center" justifyContent="space-between" className="mobile-menu-header">
+            <Typography variant="h6">Menu</Typography>
+            <IconButton onClick={closeMobileMenu}>
+              <CloseIcon />
+            </IconButton>
+          </Stack>
+
+          <Stack className="mobile-links">
+            <NavLink to="/" className="mobile-nav-link" onClick={closeMobileMenu}>
+              Home
+            </NavLink>
+            <NavLink to="/vehicles" className="mobile-nav-link" onClick={closeMobileMenu}>
+              Vehicles
+            </NavLink>
+            {user ? (
+              <NavLink to="/myBookings" className="mobile-nav-link" onClick={closeMobileMenu}>
+                My Bookings
+              </NavLink>
+            ) : null}
+            {user ? (
+              <NavLink to="/user" className="mobile-nav-link" onClick={closeMobileMenu}>
+                User
+              </NavLink>
+            ) : null}
+            <NavLink to="/help" className="mobile-nav-link" onClick={closeMobileMenu}>
+              Help
+            </NavLink>
+          </Stack>
+
+          <Stack className="mobile-auth-area">
+            {!user ? (
+              <>
+                <Button className="sign-in" onClick={handleSignInOpen}>
+                  Sign In
+                </Button>
+                <Button className="sign-up" onClick={handleSignUpOpen}>
+                  Sign Up
+                </Button>
+              </>
+            ) : (
+              <Stack spacing={1.2}>
+                <Stack direction="row" alignItems="center" spacing={1.2}>
+                  <img
+                    src={getUserImage()}
+                    className="user-avatar"
+                    alt={user.userId || "user"}
+                    onError={handleImageError}
+                  />
+                  <Typography>Hi, {user.userId}</Typography>
+                </Stack>
+                <Button variant="outlined" onClick={handleLogoutClick}>
+                  Logout
+                </Button>
+              </Stack>
+            )}
+          </Stack>
+        </Box>
+      </Drawer>
 
       <SignUpModal open={openSignUp} onClose={handleSignUpClose} />
 

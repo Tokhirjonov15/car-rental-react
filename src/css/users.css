@@ -183,3 +183,38 @@
     box-shadow: none;
   }
 }
+
+@media (max-width: 900px) {
+  .profile-page {
+    padding-top: 20px;
+    padding-bottom: 24px;
+  }
+
+  .profile-page .page-header .page-title {
+    font-size: 1.6rem;
+  }
+
+  .profile-page .page-header .page-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .profile-page .info-card .MuiCardContent-root {
+    padding: 16px !important;
+  }
+
+  .profile-page .profile-card .avatar-wrapper .profile-avatar {
+    width: 94px !important;
+    height: 94px !important;
+  }
+
+  .profile-page .action-buttons {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .profile-page .action-buttons .save-btn,
+  .profile-page .action-buttons .cancel-btn {
+    width: 100%;
+    min-width: 0 !important;
+  }
+}
