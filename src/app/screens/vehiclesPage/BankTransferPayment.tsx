@@ -28,6 +28,7 @@ import { setChosenVehicle } from './slice';
 import VehicleService from '../../services/VehicleService';
 import "../../../css/vehicles.css";
 import BookingService from '../../services/BookingService';
+import { isUserLoggedIn } from '../../../lib/auth';
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -112,6 +113,13 @@ export default function BankTransferPage() {
   };
 
   const bookingHandler = async () => {
+    if (!isUserLoggedIn()) {
+      alert("You're not authenticated, please login first!");
+      window.scrollTo(0, 0);
+      history.push("/");
+      return;
+    }
+
     try {
       if (!chosenVehicle || bookingInfo.totalDays === 0) {
         alert("Booking information is incomplete");
@@ -132,15 +140,17 @@ export default function BankTransferPage() {
         window.scrollTo(0, 0);
         history.push("/myBookings");
       }, 3000);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Booking failed:", err);
       
-      if (err) {
-        const errorMsg = err;
+      if (err?.response?.status === 401) {
+        alert("You're not authenticated, please login first!");
+      } else if (err?.response) {
+        const errorMsg = err.response?.data?.message || err.response?.statusText;
         alert(`Booking failed: ${errorMsg}`);
-        console.log("Error details:", err);
+        console.log("Error details:", err.response?.data);
       } else {
-        alert("Booking failed. Please try again.");
+        alert(`Booking failed: ${err?.message || "Please try again."}`);
       }
     }
   };

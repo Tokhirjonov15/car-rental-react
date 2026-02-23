@@ -13,6 +13,7 @@ import { serverApi } from "../../../lib/config";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { getStoredUser } from "../../../lib/auth";
 
 /** REDUX SELECTOR */
 const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
@@ -37,9 +38,9 @@ export function HomeNavbar() {
 
   // Retrieve user info from localStorage
   useEffect(() => {
-    const savedUser = localStorage.getItem('userData');
+    const savedUser = getStoredUser();
     if (savedUser && !user) {
-      setUser(JSON.parse(savedUser));
+      setUser(savedUser);
     }
   }, []);
 
@@ -71,6 +72,7 @@ export function HomeNavbar() {
   const handleLogoutConfirm = () => {
     logoutUser();
     localStorage.removeItem('userData');
+    localStorage.removeItem('user');
     setOpenLogoutConfirm(false);
     alert('Logged out successfully!');
     history.push('/');

@@ -30,6 +30,7 @@ import { retrieveChosenVehicle } from "./selector";
 import { serverApi } from "../../../lib/config";
 import "../../../css/vehicles.css";
 import BookingService from "../../services/BookingService";
+import { isUserLoggedIn } from "../../../lib/auth";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -145,6 +146,13 @@ export default function BookingPage() {
   };
   // Confirm Booking Handler
   const handleConfirmBooking = async () => {
+  if (!isUserLoggedIn()) {
+    alert("You're not authenticated, please login first!");
+    window.scrollTo(0, 0);
+    history.push("/");
+    return;
+  }
+
   // Save booking info on localStorage
   const bookingInfoToSave = {
     pickupDate: bookingData.pickupDate,
@@ -184,6 +192,11 @@ export default function BookingPage() {
     } catch (err: any) {
       console.error("Booking failed:", err);
       
+      if (err?.response?.status === 401) {
+        alert("You're not authenticated, please login first!");
+        return;
+      }
+
       if (err.response) {
         const errorMsg = err.response.data?.message || err.response.statusText;
         alert(`Booking failed: ${errorMsg}`);
