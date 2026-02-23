@@ -75,7 +75,8 @@ export default function SignInModal({ open, onClose }: SignInModalProps) {
       // Save User info to Redux store
       setUser(result);
       
-      // Save User info to localStorage
+      // Save User info to localStorage (both keys for compatibility)
+      localStorage.setItem('userData', JSON.stringify(result));
       localStorage.setItem('user', JSON.stringify(result));
       
       alert('Login successful! Welcome back! 🎉');

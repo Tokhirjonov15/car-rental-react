@@ -1,6 +1,7 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
 import { Booking, BookingInput, BookingInquiry } from "../../lib/types/booking";
+import { getAuthToken } from "../../lib/auth";
 
 class MyBookingsService {
     private readonly path: string;
@@ -20,8 +21,10 @@ class MyBookingsService {
                 params.append('bookingStatus', input.bookingStatus);
             }
 
+            const token = getAuthToken();
             const result = await axios.get(`${url}?${params.toString()}`, { 
-                withCredentials: true 
+                withCredentials: true,
+                headers: token ? { Authorization: `Bearer ${token}` } : undefined,
             });
             
             console.log("getMyBookings:", result.data);
@@ -36,8 +39,10 @@ class MyBookingsService {
     public async createBooking(input: BookingInput): Promise<Booking> {
         try {
             const url = `${this.path}/booking/create`;
+            const token = getAuthToken();
             const result = await axios.post(url, input, {
             withCredentials: true,
+            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
             });
             return result.data;
         } catch (err) {

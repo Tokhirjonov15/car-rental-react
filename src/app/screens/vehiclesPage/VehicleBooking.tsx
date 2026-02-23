@@ -184,6 +184,11 @@ export default function BookingPage() {
     } catch (err: any) {
       console.error("Booking failed:", err);
       
+      if (err?.response?.status === 401) {
+        alert("You're not authenticated, please login first!");
+        return;
+      }
+
       if (err.response) {
         const errorMsg = err.response.data?.message || err.response.statusText;
         alert(`Booking failed: ${errorMsg}`);

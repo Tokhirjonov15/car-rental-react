@@ -132,15 +132,17 @@ export default function BankTransferPage() {
         window.scrollTo(0, 0);
         history.push("/myBookings");
       }, 3000);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Booking failed:", err);
       
-      if (err) {
-        const errorMsg = err;
+      if (err?.response?.status === 401) {
+        alert("You're not authenticated, please login first!");
+      } else if (err?.response) {
+        const errorMsg = err.response?.data?.message || err.response?.statusText;
         alert(`Booking failed: ${errorMsg}`);
-        console.log("Error details:", err);
+        console.log("Error details:", err.response?.data);
       } else {
-        alert("Booking failed. Please try again.");
+        alert(`Booking failed: ${err?.message || "Please try again."}`);
       }
     }
   };

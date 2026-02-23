@@ -2,6 +2,19 @@ import axios from "axios";
 import { serverApi } from "../../lib/config";
 import { LoginInput, User, UserInput, UserUpdateInput } from "../../lib/types/user";
 
+const buildUserPayload = (raw: any): User & Record<string, any> => {
+    const coreUser = (raw?.user ?? raw) as User & Record<string, any>;
+    const token =
+        raw?.token ??
+        raw?.accessToken ??
+        raw?.jwt ??
+        coreUser?.token ??
+        coreUser?.accessToken ??
+        coreUser?.jwt;
+
+    return token ? { ...coreUser, token } : coreUser;
+};
+
 class UserService {
     private readonly path: string;
 
@@ -15,9 +28,10 @@ class UserService {
             const result = await axios.post(url, input, { withCredentials: true });
             console.log("UserSignup:", result);
             
-            const user: User = result.data.user;
+            const user = buildUserPayload(result.data);
             console.log("User:", user);
             localStorage.setItem("userData", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(user));
 
             return user;
         } catch (err) {
@@ -32,9 +46,10 @@ class UserService {
             const result = await axios.post(url, input, { withCredentials: true });
             console.log("UserLogin:", result);
             
-            const user: User = result.data.user;
+            const user = buildUserPayload(result.data);
             console.log("User:", user);
             localStorage.setItem("userData", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(user));
 
             return user;
         } catch (err) {

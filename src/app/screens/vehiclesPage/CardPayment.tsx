@@ -92,12 +92,27 @@ export default function PaymentPage() {
 
   // Check if all input fields are correct
   const isFormValid = () => {
+    const cardDigits = cardNumber.replace(/\s/g, "");
     return (
-      cardNumber.trim() !== '' &&
+      cardDigits.length === 16 &&
       cardholderName.trim() !== '' &&
-      expiryDate.trim() !== '' &&
-      cvv.trim() !== ''
+      validateExpiryDate(expiryDate) &&
+      cvv.trim().length === 3
     );
+  };
+
+  const validateExpiryDate = (value: string): boolean => {
+    const cleaned = value.replace(/\D/g, "");
+    if (cleaned.length !== 4) return false;
+
+    const month = Number(cleaned.slice(0, 2));
+    const year = Number(cleaned.slice(2, 4));
+    const currentYear = new Date().getFullYear() % 100;
+
+    if (month < 1 || month > 12) return false;
+    if (year < currentYear) return false;
+
+    return true;
   };
 
   // Card number format 16 number
@@ -128,6 +143,11 @@ export default function PaymentPage() {
   };
 
   const bookingHandler = async () => {
+    if (!validateExpiryDate(expiryDate)) {
+      alert("Check expire date of your card");
+      return;
+    }
+
     try {
       if (!chosenVehicle || bookingInfo.totalDays === 0) {
         alert("Booking information is incomplete");
@@ -148,15 +168,17 @@ export default function PaymentPage() {
         window.scrollTo(0, 0);
         history.push("/myBookings");
       }, 3000);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Booking failed:", err);
       
-      if (err) {
-        const errorMsg = err;
+      if (err?.response?.status === 401) {
+        alert("You're not authenticated, please login first!");
+      } else if (err?.response) {
+        const errorMsg = err.response?.data?.message || err.response?.statusText;
         alert(`Booking failed: ${errorMsg}`);
-        console.log("Error details:", err);
+        console.log("Error details:", err.response?.data);
       } else {
-        alert("Booking failed. Please try again.");
+        alert(`Booking failed: ${err?.message || "Please try again."}`);
       }
     }
   };
@@ -238,13 +260,19 @@ export default function PaymentPage() {
 
                 <Stack direction="row" spacing={2}>
                   <Box flex={1}>
-                    <TextField
-                      label="Expiry Date"
-                      placeholder="MM/YY"
+                  <TextField
+                    label="Expiry Date"
+                    placeholder="MM/YY"
                       fullWidth
                       className="input-field"
                       value={expiryDate}
                       onChange={handleExpiryDateChange}
+                      error={expiryDate !== '' && !validateExpiryDate(expiryDate)}
+                      helperText={
+                        expiryDate !== '' && !validateExpiryDate(expiryDate)
+                          ? "Use MM/YY. Month 01-12 and year must be current or future."
+                          : " "
+                      }
                     />
                   </Box>
                   <Box flex={1}>
