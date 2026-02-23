@@ -28,13 +28,27 @@ export const getAuthToken = (): string | null => {
 
   for (const key of candidateKeys) {
     const value = stored?.[key];
+<<<<<<< HEAD
     if (typeof value === "string" && value.trim() !== "") return value;
+=======
+    if (typeof value === "string" && value.trim() !== "") {
+      const token = value.trim();
+      return token.startsWith("Bearer ") ? token.replace("Bearer ", "") : token;
+    }
+>>>>>>> master
   }
 
   if (typeof stored?.user === "object" && stored.user) {
     for (const key of candidateKeys) {
       const value = stored.user?.[key];
+<<<<<<< HEAD
       if (typeof value === "string" && value.trim() !== "") return value;
+=======
+      if (typeof value === "string" && value.trim() !== "") {
+        const token = value.trim();
+        return token.startsWith("Bearer ") ? token.replace("Bearer ", "") : token;
+      }
+>>>>>>> master
     }
   }
 
