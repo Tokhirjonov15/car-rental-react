@@ -28,7 +28,6 @@ import { setChosenVehicle } from './slice';
 import VehicleService from '../../services/VehicleService';
 import "../../../css/vehicles.css";
 import BookingService from '../../services/BookingService';
-import { isUserLoggedIn } from '../../../lib/auth';
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -113,13 +112,6 @@ export default function BankTransferPage() {
   };
 
   const bookingHandler = async () => {
-    if (!isUserLoggedIn()) {
-      alert("You're not authenticated, please login first!");
-      window.scrollTo(0, 0);
-      history.push("/");
-      return;
-    }
-
     try {
       if (!chosenVehicle || bookingInfo.totalDays === 0) {
         alert("Booking information is incomplete");

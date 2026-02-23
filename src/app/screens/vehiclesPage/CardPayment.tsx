@@ -25,7 +25,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import VehicleService from '../../services/VehicleService';
 import "../../../css/vehicles.css";
 import BookingService from '../../services/BookingService';
-import { isUserLoggedIn } from '../../../lib/auth';
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -144,13 +143,6 @@ export default function PaymentPage() {
   };
 
   const bookingHandler = async () => {
-    if (!isUserLoggedIn()) {
-      alert("You're not authenticated, please login first!");
-      window.scrollTo(0, 0);
-      history.push("/");
-      return;
-    }
-
     if (!validateExpiryDate(expiryDate)) {
       alert("Check expire date of your card");
       return;
