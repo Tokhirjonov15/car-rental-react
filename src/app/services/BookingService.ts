@@ -24,7 +24,13 @@ class MyBookingsService {
             const token = getAuthToken();
             const result = await axios.get(`${url}?${params.toString()}`, { 
                 withCredentials: true,
-                headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+                headers: token
+                    ? {
+                          Authorization: `Bearer ${token}`,
+                          "x-access-token": token,
+                          "x-auth-token": token,
+                      }
+                    : undefined,
             });
             
             console.log("getMyBookings:", result.data);
@@ -42,7 +48,13 @@ class MyBookingsService {
             const token = getAuthToken();
             const result = await axios.post(url, input, {
             withCredentials: true,
-            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+            headers: token
+                ? {
+                      Authorization: `Bearer ${token}`,
+                      "x-access-token": token,
+                      "x-auth-token": token,
+                  }
+                : undefined,
             });
             return result.data;
         } catch (err) {

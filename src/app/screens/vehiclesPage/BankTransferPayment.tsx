@@ -188,10 +188,10 @@ export default function BankTransferPage() {
             <Stack direction="row" spacing={2} alignItems="flex-start">
               <InfoIcon className="notice-icon" />
               <Box>
-                <Typography variant="body1" className="notice-text">
-                  <strong>Important:</strong> Please include your Booking ID{' '}
-                  <Chip label={bookingSummary.bookingId} size="small" className="booking-id-chip" />
-                  {' '}in the payment reference to ensure quick processing.
+                <Typography variant="body1" component="div" className="notice-text">
+                  <strong>Important:</strong> Please include your Booking ID{" "}
+                  <Chip label={bookingSummary.bookingId} size="small" className="booking-id-chip" />{" "}
+                  in the payment reference to ensure quick processing.
                 </Typography>
               </Box>
             </Stack>
