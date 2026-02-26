@@ -13,7 +13,7 @@ import { serverApi } from "../../../lib/config";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
-import { getStoredUser } from "../../../lib/auth";
+import { clearStoredAuth, getAuthenticatedUser } from "../../../lib/auth";
 
 /** REDUX SELECTOR */
 const userRetriever = createSelector(retrieveUser, (user) => ({ user }));
@@ -36,11 +36,16 @@ export function HomeNavbar() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const imageVersion = useMemo(() => Date.now(), [user]);
 
-  // Retrieve user info from localStorage
+  // Load user only if auth token exists and is still valid.
   useEffect(() => {
-    const savedUser = getStoredUser();
+    const savedUser = getAuthenticatedUser();
     if (savedUser && !user) {
       setUser(savedUser);
+      return;
+    }
+
+    if (!savedUser && user) {
+      logoutUser();
     }
   }, []);
 
@@ -71,11 +76,10 @@ export function HomeNavbar() {
 
   const handleLogoutConfirm = () => {
     logoutUser();
-    localStorage.removeItem('userData');
-    localStorage.removeItem('user');
+    clearStoredAuth();
     setOpenLogoutConfirm(false);
-    alert('Logged out successfully!');
-    history.push('/');
+    alert("Logged out successfully!");
+    history.push("/");
   };
 
   const closeMobileMenu = () => {
@@ -311,4 +315,3 @@ export function HomeNavbar() {
     </>
   );
 }
-

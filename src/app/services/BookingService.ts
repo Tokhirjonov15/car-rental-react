@@ -14,19 +14,16 @@ class MyBookingsService {
         try {
             const url = `${this.path}/booking/all`;
             const params = new URLSearchParams();
-            params.append('page', input.page.toString());
-            params.append('limit', input.limit.toString());
+            params.append("page", input.page.toString());
+            params.append("limit", input.limit.toString());
             
             if (input.bookingStatus) {
-                params.append('bookingStatus', input.bookingStatus);
+                params.append("bookingStatus", input.bookingStatus);
             }
 
             const token = getAuthToken();
-            const result = await axios.get(`${url}?${params.toString()}`, { 
+            const result = await axios.get(`${url}?${params.toString()}`, {
                 withCredentials: true,
-<<<<<<< HEAD
-                headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-=======
                 headers: token
                     ? {
                           Authorization: `Bearer ${token}`,
@@ -34,7 +31,6 @@ class MyBookingsService {
                           "x-auth-token": token,
                       }
                     : undefined,
->>>>>>> master
             });
             
             console.log("getMyBookings:", result.data);
@@ -51,18 +47,14 @@ class MyBookingsService {
             const url = `${this.path}/booking/create`;
             const token = getAuthToken();
             const result = await axios.post(url, input, {
-            withCredentials: true,
-<<<<<<< HEAD
-            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-=======
-            headers: token
-                ? {
-                      Authorization: `Bearer ${token}`,
-                      "x-access-token": token,
-                      "x-auth-token": token,
-                  }
-                : undefined,
->>>>>>> master
+                withCredentials: true,
+                headers: token
+                    ? {
+                          Authorization: `Bearer ${token}`,
+                          "x-access-token": token,
+                          "x-auth-token": token,
+                      }
+                    : undefined,
             });
             return result.data;
         } catch (err) {
